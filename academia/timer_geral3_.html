@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios</title>
+    <style>
+        li {
+            padding: 10px;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: grey;
+        }
+        .timer {
+            font-size: 0.9em;
+            color: lightseagreen;
+            margin-left: 10px;
+        }
+        .skip-button {
+            margin-left: 10px;
+            font-size: 0.8em;
+            padding: 3px 6px;
+            background-color: #008CBA;
+            border: 1px solid black;
+            cursor: pointer;
+            display: none; /* Inicialmente oculto */
+        }
+        .active-group {
+            font-weight: bold;
+            border: 2px solid #008CBA;
+        }
+        .exercise-list input[type="checkbox"] {
+            transform: scale(1.5);
+            margin-left: 10px;
+        }
+        .exercise-list input[type="number"] {
+            font-size: 1.2em;
+            width: 60px;
+            margin-left: 10px;
+        }
+        button {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .button_timer {
+            background-color: #008CBA;
+        }
+        div {
+            width: 370px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <ul id="fichas">
+        <li data-ficha-id="fichaA">Ficha A - Última execução: <span id="lastExecutionA">N/A</span></li>
+        <li data-ficha-id="fichaB">Ficha B - Última execução: <span id="lastExecutionB">N/A</span></li>
+        <li data-ficha-id="fichaC">Ficha C - Última execução: <span id="lastExecutionC">N/A</span></li>
+        <li data-ficha-id="fichaD">Ficha D - Última execução: <span id="lastExecutionD">N/A</span></li>
+    </ul>
+
+    <button id="startButton" onclick="startExercises()" class="button_timer">Iniciar Treino</button>
+    <span id="generalTimer" class="timer" style="display: none;"></span>
+
+    <!-- FICHA A - INÍCIO -->
+    <h1 class="ficha" data-ficha-id="fichaA">Ficha A - Treino de Peito, Triceps e Ombro</h1>
+    <div class="exercise-group" data-group-id="supinoReto">
+        <h1>Supino Reto <button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
+        <img src="imagens/supino-reto.webp" alt="">
+        <ol class="exercise-list">
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+        </ol>
+    </div>
+    <!-- FICHA A - FIM -->
+
+    <!-- FICHA B - INÍCIO -->
+    <h1 class="ficha hidden" data-ficha-id="fichaB">Ficha B - Quadriceps, Gluteos e Abdominal</h1>
+    <div class="exercise-group hidden" data-group-id="agachamentoPendulo">
+        <h1>Agachamento Pêndulo <button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
+        <img src="imagens/agachamento-pendulo.gif" alt="">
+        <ol class="exercise-list">
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+        </ol>
+    </div>
+    <!-- FICHA B - FIM -->
+
+    <button id="endButton" class="button_timer" onclick="endGeneralTimer()" style="display: none;">Terminar Treino</button>
+
+    <script>
+        let activeGroup = null;
+        let generalTimerInterval = null;
+        let elapsedTime = 0;
+        let exercisesStarted = false;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadWeights();
+            loadLastExecutionDates();
+            hideCompletedFichas();
+        });
+
+        function hideCompletedFichas() {
+            const fichas = document.querySelectorAll(".ficha");
+            fichas.forEach(ficha => {
+                const fichaId = ficha.dataset.fichaId;
+                const lastExecution = localStorage.getItem(`${fichaId}_lastExecution`);
+                if (lastExecution) {
+                    ficha.classList.add('hidden');
+                    const relatedGroup = document.querySelector(`.exercise-group[data-group-id="${fichaId.replace('ficha', '').toLowerCase()}"]`);
+                    if (relatedGroup) {
+                        relatedGroup.classList.add('hidden');
+                    }
+                } else {
+                    ficha.classList.remove('hidden');
+                    const relatedGroup = document.querySelector(`.exercise-group[data-group-id="${fichaId.replace('ficha', '').toLowerCase()}"]`);
+                    if (relatedGroup) {
+                        relatedGroup.classList.remove('hidden');
+                    }
+                    return; // Para o loop após mostrar a primeira ficha não finalizada
+                }
+            });
+        }
+
+        function loadLastExecutionDates() {
+            const fichas = document.querySelectorAll("#fichas li");
+            fichas.forEach(ficha => {
+                const fichaId = ficha.dataset.fichaId;
+                const lastExecution = localStorage.getItem(`${fichaId}_lastExecution`);
+                if (lastExecution) {
+                    ficha.querySelector("span").textContent = lastExecution;
+                }
+            });
+        }
+
+        function saveLastExecutionDate(fichaId) {
+            const currentDate = new Date().toLocaleDateString();
+            localStorage.setItem(`${fichaId}_lastExecution`, currentDate);
+        }
+
+        function saveWeight(group, index, value) {
+            const key = `${group}_weight_${index}`;
+            localStorage.setItem(key, value);
+        }
+
+        function loadWeights() {
+            const groups = document.querySelectorAll(".exercise-group");
+            groups.forEach(group => {
+                const groupId = group.dataset.groupId;
+                const exercises = group.querySelectorAll(".exercise-list li");
+                exercises.forEach((exercise, index) => {
+                    const key = `${groupId}_weight_${index}`;
+                    const weight = localStorage.getItem(key);
+                    if (weight !== null) {
+                        exercise.querySelector("input[type='number']").value = weight;
+                    }
+                });
+            });
+        }
+
+        function startExercises() {
+            if (exercisesStarted) return;
+
+            document.querySelectorAll(".skip-button").forEach(button => button.style.display = 'inline-block');
+            document.getElementById('generalTimer').style.display = 'inline';
+            generalTimerInterval = setInterval(updateGeneralTimer, 1000);
+            exercisesStarted = true;
+        }
+
+        function updateGeneralTimer() {
+            elapsedTime++;
+            const minutes = Math.floor(elapsedTime / 60);
+            const seconds = elapsedTime % 60;
+            document.getElementById('generalTimer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+
+        function activateGroup(group) {
+            const checkboxes = group.querySelectorAll("input[type='checkbox']");
+            if (Array.from(checkboxes).every(cb => cb.checked)) {
+                group.classList.remove('active-group');
+                nextGroup();
+            } else {
+                group.classList.add('active-group');
+                activateTimers(group);
+            }
+        }
+
+        function activateTimers(group) {
+            const timers = group.querySelectorAll(".timer");
+            timers.forEach(timer => {
+                timer.textContent = "01:00";
+                let timeLeft = 60;
+                const intervalId = setInterval(() => {
+                    if (timeLeft <= 0) {
+                        timer.textContent = "00:00";
+                        clearInterval(intervalId);
+                        return;
+                    }
+                    timeLeft--;
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    timer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                }, 1000);
+            });
+        }
+
+        function nextGroup() {
+            const groups = document.querySelectorAll(".exercise-group");
+            let nextGroupFound = false;
+            groups.forEach(group => {
+                if (group.classList.contains('active-group')) {
+                    group.classList.remove('active-group');
+                } else if (!nextGroupFound && !group.classList.contains('hidden')) {
+                    group.classList.add('active-group');
+                    nextGroupFound = true;
+                }
+            });
+            if (!nextGroupFound) {
+                endGeneralTimer();
+            }
+        }
+
+        function endGeneralTimer() {
+            clearInterval(generalTimerInterval);
+            document.getElementById('generalTimer').style.display = 'none';
+            document.getElementById('endButton').style.display = 'none';
+
+            const currentFicha = document.querySelector(".ficha:not(.hidden)");
+            if (currentFicha) {
+                const fichaId = currentFicha.dataset.fichaId;
+                saveLastExecutionDate(fichaId);
+                hideCompletedFichas();
+            }
+
+            exercisesStarted = false;
+        }
+
+        function toggleCompleted(checkbox) {
+            const allCheckboxes = checkbox.closest("ol").querySelectorAll("input[type='checkbox']");
+            const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
+            if (allChecked) {
+                checkbox.closest(".exercise-group").classList.remove('disabled');
+                activateGroup(checkbox.closest(".exercise-group"));
+            }
+        }
+
+        function skipTimer(button) {
+            const group = button.closest(".exercise-group");
+            group.querySelectorAll(".timer").forEach(timer => timer.textContent = "00:00");
+            nextGroup();
+        }
+
+        document.querySelectorAll('.exercise-group').forEach(group => {
+            group.addEventListener('click', () => {
+                if (!exercisesStarted) {
+                    startExercises();
+                }
+                if (group.classList.contains('active-group')) {
+                    activateTimers(group);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

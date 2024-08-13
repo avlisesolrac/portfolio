@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios</title>
+    <style>
+        li {
+            padding: 10px;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: grey;
+        }
+        .timer {
+            font-size: 0.9em;
+            color: lightseagreen;
+            margin-left: 10px;
+        }
+        .skip-button {
+            margin-left: 10px;
+            font-size: 0.8em;
+            padding: 3px 6px;
+            display: none;
+            background-color: #008CBA;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        .disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        .active-group {
+            font-weight: bold;
+            border: 2px solid #008CBA;
+        }
+        .exercise-list input[type="checkbox"] {
+            transform: scale(1.5);
+            margin-left: 10px;
+        }
+        .exercise-list input[type="number"] {
+            font-size: 1.2em;
+            width: 60px;
+            margin-left: 10px;
+        }
+        button {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .button_timer {
+            background-color: #008CBA;
+        }
+        /*li{border: dotted black;width: 250px}*/
+        div{width: 370px}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <h1>Gerenciamento dos Treinos da Academia</h1>
+    <p>O objetivo desta aplicação é que eu possa fazer os treinos da academia com o acompanhamento gerenciado por esta aplicação</p>
+    <p>Será utilizado como base o app Treino utilizado na época em que eu treinava na academia Ironberg de São Caetano do Sul</p>
+
+    <ul id="fichas">
+        <li data-ficha-id="fichaA">Ficha A - Última execução: <span id="lastExecutionA">N/A</span></li>
+        <li data-ficha-id="fichaB">Ficha B - Última execução: <span id="lastExecutionB">N/A</span></li>
+        <li data-ficha-id="fichaC">Ficha C - Última execução: <span id="lastExecutionC">N/A</span></li>
+        <li data-ficha-id="fichaD">Ficha D - Última execução: <span id="lastExecutionD">N/A</span></li>
+    </ul>
+
+    <button id="startButton" onclick="startExercises()" class="button_timer">Iniciar Treino</button>
+    <span id="generalTimer" class="timer" style="display: none;"></span>
+    
+    <!-- FICHA A - INÍCIO -->
+    <h1>Ficha A - Treino de Peito, Triceps e Ombro</h1>
+    <ol id="exerciseList">
+        <li>Supino Reto</li>
+        <li>Crucifixo Declinado</li>
+        <li>Crucifixo Inclinado</li>
+        <li>Desenvolvimento - Ombros</li>
+        <li>Triceps Cross(barra W)</li>
+        <li>Triceps Francês</li>
+        <li>Triceps Coice Cross</li>
+        <li>Elevação Lateral</li>
+        <li>Elevação Lateral - Sentado</li>
+        <li>Encolhimento - Trapézio</li>
+    </ol>
+
+    <div class="exercise-group" data-group-id="supinoReto" onclick="tryActivateGroup('supinoReto')">
+        <h1>Supino Reto<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
+        <img src="imagens/supino-reto.webp" alt="">
+        <ol class="exercise-list disabled">
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+        </ol>
+    </div>
+
+<!-- FICHA A - FIM -->
+
+<!-- FICHA B - INÍCIO -->
+    <h1>Ficha B - Quadriceps, Gluteos e Abdominal</h1>
+    <ol>
+        <li>Leg Press 45º</li>
+        <li>Agachamento Pendulo</li>
+        <li>Afundo Smith</li>
+        <li>Elevação Pelvica</li>
+        <li>Cadeira Abdutora</li>
+        <li>Abdominal 1</li>
+        <li>Abdominal 2</li>
+    </ol>
+
+    <div class="exercise-group" data-group-id="agachamentoPendulo" onclick="tryActivateGroup('agachamentoPendulo')">
+        <h1>Agachamento Pendulo<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
+        <img src="imagens/agachamento-pendulo.gif" alt="">
+        <ol class="exercise-list disabled">
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+        </ol>
+    </div>
+<!-- FICHA B - FIM -->
+
+    <button id="endButton" class="button_timer" onclick="endGeneralTimer()" style="display: none;">Terminar Treino</button>
+
+    <script>
+        let activeSeriesTimer = null;
+        let generalTimerInterval = null;
+        let elapsedTime = 0;
+        let currentTimerSpan = null;
+        let currentCheckbox = null;
+        let currentGroup = null;
+        let exercisesStarted = false; // Flag para indicar se os exercícios foram iniciados
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadWeights();
+            loadLastExecutionDates(); // Carrega e exibe as datas de última execução
+        });
+
+        function loadLastExecutionDates() {
+            const fichas = document.querySelectorAll("#fichas li");
+            fichas.forEach(ficha => {
+                const fichaId = ficha.dataset.fichaId;
+                const lastExecution = localStorage.getItem(`${fichaId}_lastExecution`);
+                if (lastExecution) {
+                    ficha.querySelector("span").textContent = lastExecution;
+                }
+            });
+        }
+
+        function saveLastExecutionDate(fichaId) {
+            const currentDate = new Date().toLocaleDateString(); // Formato de data local
+            localStorage.setItem(`${fichaId}_lastExecution`, currentDate);
+        }
+
+        function saveWeight(group, index, value) {
+            const key = `${group}_weight_${index}`;
+            localStorage.setItem(key, value);
+        }
+
+        function loadWeights() {
+            const groups = document.querySelectorAll(".exercise-group");
+            groups.forEach(group => {
+                const groupId = group.dataset.groupId;
+                const inputs = group.querySelectorAll("input[type='number']");
+                inputs.forEach((input, index) => {
+                    const key = `${groupId}_weight_${index}`;
+                    const savedValue = localStorage.getItem(key);
+                    if (savedValue !== null) {
+                        input.value = savedValue;
+                    }
+                });
+            });
+        }
+
+        function formatTime(seconds) {
+            const hrs = Math.floor(seconds / 3600);
+            const mins = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            return `${hrs > 0 ? hrs + 'h ' : ''}${mins > 0 ? mins + 'm ' : ''}${secs}s`;
+        }
+
+        function startExercises() {
+            startGeneralTimer();
+            exercisesStarted = true;
+            document.getElementById('startButton').style.display = 'none';
+            document.getElementById('endButton').style.display = 'block';
+            document.getElementById('generalTimer').style.display = 'inline';
+        }
+
+        function tryActivateGroup(groupId) {
+            if (!exercisesStarted) return; // Não faz nada se os exercícios não foram iniciados
+            activateGroup(groupId);
+        }
+
+        function activateGroup(groupId) {
+            const group = document.querySelector(`.exercise-group[data-group-id="${groupId}"]`);
+            if (group) {
+                if (currentGroup) {
+                    deactivateGroup(currentGroup);
+                }
+                currentGroup = group;
+                currentGroup.classList.add('active-group');
+                group.querySelector('.exercise-list').classList.remove('disabled');
+                group.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.disabled = false;
+                });
+                group.querySelector('.skip-button').style.display = 'inline';
+                group.querySelector('.skip-button').disabled = false;
+            }
+        }
+
+        function deactivateGroup(group) {
+            group.querySelector('.exercise-list').classList.add('disabled');
+            group.querySelector('.skip-button').style.display = 'none';
+            group.classList.remove('active-group');
+        }
+
+        function toggleCompleted(checkbox) {
+            const listItem = checkbox.parentElement;
+            const timerSpan = listItem.nextElementSibling;
+
+            if (checkbox.checked) {
+                if (activeSeriesTimer !== null) {
+                    checkbox.checked = false;
+                    return;
+                }
+                listItem.classList.add('completed');
+                startSeriesTimer(timerSpan, checkbox);
+            } else {
+                listItem.classList.remove('completed');
+                if (activeSeriesTimer !== null) {
+                    clearInterval(activeSeriesTimer);
+                    activeSeriesTimer = null;
+                }
+                timerSpan.textContent = '';
+            }
+        }
+
+        function startSeriesTimer(timerSpan, checkbox) {
+            let timeLeft = 60; // Tempo de descanso em segundos
+            timerSpan.textContent = ` ${timeLeft}s`;
+
+            currentTimerSpan = timerSpan;
+            currentCheckbox = checkbox;
+
+            document.querySelectorAll('.skip-button').forEach(button => button.disabled = false);
+
+            activeSeriesTimer = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    timerSpan.textContent = ` ${timeLeft}s`;
+                } else {
+                    clearInterval(activeSeriesTimer);
+                    activeSeriesTimer = null;
+                    timerSpan.textContent = 'Finalizado';
+                    document.querySelectorAll('.skip-button').forEach(button => button.disabled = true);
+                    updateSeriesCompletion(checkbox);
+
+                    // Vibração ao término do descanso
+                    if (navigator.vibrate) {
+                        navigator.vibrate(200); // Vibra por 200 milissegundos
+                    }
+                }
+            }, 1000);
+        }
+
+        function skipTimer(button) {
+            if (activeSeriesTimer !== null) {
+                clearInterval(activeSeriesTimer);
+                activeSeriesTimer = null;
+            }
+            if (currentTimerSpan !== null) {
+                currentTimerSpan.textContent = 'Finalizado';
+            }
+            if (currentCheckbox !== null) {
+                currentCheckbox.disabled = true;
+            }
+            button.disabled = true;
+            updateSeriesCompletion(currentCheckbox);
+        }
+
+        function updateSeriesCompletion(checkbox) {
+            const group = checkbox.closest('.exercise-group');
+            const completedCount = group.querySelectorAll('.completed').length;
+            const totalCount = group.querySelectorAll('li').length;
+
+            if (completedCount === totalCount) {
+                deactivateGroup(group);
+                moveToNextGroup();
+                
+                // Verifica se todos os grupos dentro da ficha atual foram concluídos
+                const fichaCompleted = checkFichaCompletion();
+                if (fichaCompleted) {
+                    const currentFichaId = getFichaIdForGroup(group);
+                    saveLastExecutionDate(currentFichaId);
+                }
+            }
+        }
+
+        function checkFichaCompletion() {
+            const groups = Array.from(document.querySelectorAll('.exercise-group'));
+            return groups.every(isGroupCompleted);
+        }
+
+        function getFichaIdForGroup(group) {
+            // Aqui você pode definir a lógica para mapear o grupo ao ID da ficha correspondente
+            // Por exemplo, você pode verificar o ID do grupo ou o índice na lista de grupos
+            // Vou usar um mapeamento simples baseado nos IDs dos grupos usados como exemplo:
+            if (group.dataset.groupId.startsWith('supinoReto')) return 'fichaA';
+            if (group.dataset.groupId.startsWith('agachamentoPendulo')) return 'fichaB';
+            // Adicione mais mapeamentos conforme necessário
+            return null;
+        }
+
+        function moveToNextGroup() {
+            const groups = Array.from(document.querySelectorAll('.exercise-group'));
+            const currentIndex = groups.indexOf(currentGroup);
+            let nextGroup = null;
+
+            if (currentIndex < groups.length - 1) {
+                nextGroup = groups[currentIndex + 1];
+            } else {
+                // Se for o último grupo, voltar para o primeiro grupo não completado
+                nextGroup = groups.find(group => !isGroupCompleted(group));
+            }
+
+            if (nextGroup) {
+                activateGroup(nextGroup.dataset.groupId);
+                window.scrollTo({ top: nextGroup.offsetTop, behavior: 'smooth' });
+            }
+        }
+
+        function isGroupCompleted(group) {
+            const completedCount = group.querySelectorAll('.completed').length;
+            const totalCount = group.querySelectorAll('li').length;
+            return completedCount === totalCount;
+        }
+
+        function startGeneralTimer() {
+            const generalTimerSpan = document.getElementById('generalTimer');
+            generalTimerSpan.textContent = `Tempo decorrido: ${formatTime(elapsedTime)}`;
+
+            generalTimerInterval = setInterval(() => {
+                elapsedTime++;
+                generalTimerSpan.textContent = `Tempo decorrido: ${formatTime(elapsedTime)}`;
+            }, 1000);
+        }
+
+        function endGeneralTimer() {
+            if (generalTimerInterval !== null) {
+                clearInterval(generalTimerInterval);
+                generalTimerInterval = null;
+            }
+            document.getElementById('generalTimer').textContent = ` Tempo encerrado após ${formatTime(elapsedTime)}`;
+            document.getElementById('endButton').style.display = 'none';
+
+            // Salvando a data da última execução da ficha ativa
+            const currentFicha = getFichaIdForGroup(currentGroup);
+            if (currentFicha) {
+                saveLastExecutionDate(currentFicha);
+            }
+        }
+    </script>
+</body>
+</html>

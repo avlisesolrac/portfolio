@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supino Reto</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: grey;
+        }
+    </style>
+</head>
+<body>
+    <h1>Supino Reto</h1>
+    <ol>
+        <li><label><input type="checkbox" onclick="toggleCompleted(this)"> Peso 20 kg</label></li>
+        <li><label><input type="checkbox" onclick="toggleCompleted(this)"> Peso 20 kg</label></li>
+        <li><label><input type="checkbox" onclick="toggleCompleted(this)"> Peso 20 kg</label></li>
+        <li><label><input type="checkbox" onclick="toggleCompleted(this)"> Peso 20 kg</label></li>
+    </ol>
+
+    <script>
+        function toggleCompleted(checkbox) {
+            const listItem = checkbox.parentElement;
+            if (checkbox.checked) {
+                listItem.classList.add('completed');
+            } else {
+                listItem.classList.remove('completed');
+            }
+        }
+    </script>
+</body>
+</html>

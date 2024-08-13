@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios</title>
+    <style>
+        li {
+            padding: 10px;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: grey;
+        }
+        .timer {
+            font-size: 0.9em;
+            color: red;
+            margin-left: 10px;
+        }
+        .skip-button {
+            margin-left: 10px;
+            font-size: 0.8em;
+            padding: 3px 6px;
+            display: none;
+            background-color: yellow;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        .disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        .active-group {
+            font-weight: bold;
+            border: 2px solid green;
+        }
+        .exercise-list input[type="checkbox"] {
+            transform: scale(1.5);
+            margin-left: 10px;
+        }
+        .exercise-list input[type="number"] {
+            font-size: 1.2em;
+            width: 60px;
+            margin-left: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <button id="startButton" onclick="startExercises()">Iniciar Exercícios</button>
+    <span id="generalTimer" class="timer" style="display: none;"></span>
+
+    <div class="exercise-group" data-group-id="supinoReto" onclick="activateGroup('supinoReto')">
+        <h1>Supino Reto<button class="skip-button" onclick="skipTimer(this)" disabled>Pular</button></h1>
+        
+        <ol class="exercise-list disabled">
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+        </ol>
+    </div>
+
+    <div class="exercise-group" data-group-id="crucifixoDeclinado" onclick="activateGroup('crucifixoDeclinado')">
+        <h1>Crucifixo Declinado<button class="skip-button" onclick="skipTimer(this)" disabled>Pular</button></h1>
+        
+        <ol class="exercise-list disabled">
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('crucifixoDeclinado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('crucifixoDeclinado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('crucifixoDeclinado', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('crucifixoDeclinado', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+        </ol>
+    </div>
+    
+    <!-- Adicione mais grupos de exercícios aqui -->
+    <div class="exercise-group" data-group-id="outroExercicio" onclick="activateGroup('outroExercicio')">
+        <h1>Outro Exercicio<button class="skip-button" onclick="skipTimer(this)" disabled>Pular</button></h1>
+        
+        <ol class="exercise-list disabled">
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('outroExercicio', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('outroExercicio', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('outroExercicio', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('outroExercicio', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+        </ol>
+    </div>
+
+    <button id="endButton" onclick="endGeneralTimer()" style="display: none;">Terminar Temporizador</button>
+
+
+    <script>
+        let activeSeriesTimer = null;
+        let generalTimerInterval = null;
+        let elapsedTime = 0;
+        let currentTimerSpan = null;
+        let currentCheckbox = null;
+        let currentGroup = null;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadWeights();
+        });
+
+        function saveWeight(group, index, value) {
+            const key = `${group}_weight_${index}`;
+            localStorage.setItem(key, value);
+        }
+
+        function loadWeights() {
+            const groups = document.querySelectorAll(".exercise-group");
+            groups.forEach(group => {
+                const groupId = group.dataset.groupId;
+                const inputs = group.querySelectorAll("input[type='number']");
+                inputs.forEach((input, index) => {
+                    const key = `${groupId}_weight_${index}`;
+                    const savedValue = localStorage.getItem(key);
+                    if (savedValue !== null) {
+                        input.value = savedValue;
+                    }
+                });
+            });
+        }
+
+        function formatTime(seconds) {
+            const hrs = Math.floor(seconds / 3600);
+            const mins = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            return `${hrs > 0 ? hrs + 'h ' : ''}${mins > 0 ? mins + 'm ' : ''}${secs}s`;
+        }
+
+        function startExercises() {
+            startGeneralTimer();
+            document.getElementById('startButton').style.display = 'none';
+            document.getElementById('endButton').style.display = 'block';
+            document.getElementById('generalTimer').style.display = 'inline';
+        }
+
+        function activateGroup(groupId) {
+            const group = document.querySelector(`.exercise-group[data-group-id="${groupId}"]`);
+            if (group) {
+                if (currentGroup) {
+                    deactivateGroup(currentGroup);
+                }
+                currentGroup = group;
+                currentGroup.classList.add('active-group');
+                group.querySelector('.exercise-list').classList.remove('disabled');
+                group.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.disabled = false;
+                });
+                group.querySelector('.skip-button').style.display = 'inline';
+                group.querySelector('.skip-button').disabled = false;
+            }
+        }
+
+        function deactivateGroup(group) {
+            group.querySelector('.exercise-list').classList.add('disabled');
+            group.querySelector('.skip-button').style.display = 'none';
+            group.classList.remove('active-group');
+        }
+
+        function toggleCompleted(checkbox) {
+            const listItem = checkbox.parentElement;
+            const timerSpan = listItem.nextElementSibling;
+
+            if (checkbox.checked) {
+                if (activeSeriesTimer !== null) {
+                    checkbox.checked = false;
+                    return;
+                }
+                listItem.classList.add('completed');
+                startSeriesTimer(timerSpan, checkbox);
+            } else {
+                listItem.classList.remove('completed');
+                if (activeSeriesTimer !== null) {
+                    clearInterval(activeSeriesTimer);
+                    activeSeriesTimer = null;
+                }
+                timerSpan.textContent = '';
+            }
+        }
+
+        function startSeriesTimer(timerSpan, checkbox) {
+            let timeLeft = 60;
+            timerSpan.textContent = ` ${timeLeft}s`;
+
+            currentTimerSpan = timerSpan;
+            currentCheckbox = checkbox;
+
+            document.querySelectorAll('.skip-button').forEach(button => button.disabled = false);
+
+            activeSeriesTimer = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    timerSpan.textContent = ` ${timeLeft}s`;
+                } else {
+                    clearInterval(activeSeriesTimer);
+                    activeSeriesTimer = null;
+                    timerSpan.textContent = ' (Tempo esgotado)';
+                    document.querySelectorAll('.skip-button').forEach(button => button.disabled = true);
+                    updateSeriesCompletion(checkbox);
+                }
+            }, 1000);
+        }
+
+        function skipTimer(button) {
+            if (activeSeriesTimer !== null) {
+                clearInterval(activeSeriesTimer);
+                activeSeriesTimer = null;
+            }
+            if (currentTimerSpan !== null) {
+                currentTimerSpan.textContent = ' (Pulou)';
+            }
+            if (currentCheckbox !== null) {
+                currentCheckbox.disabled = true;
+            }
+            button.disabled = true;
+            updateSeriesCompletion(currentCheckbox);
+        }
+
+        function updateSeriesCompletion(checkbox) {
+            const group = checkbox.closest('.exercise-group');
+            const completedCount = group.querySelectorAll('.completed').length;
+            const totalCount = group.querySelectorAll('li').length;
+
+            if (completedCount === totalCount) {
+                deactivateGroup(group);
+                checkAllExercisesCompleted();
+            }
+        }
+
+        function startGeneralTimer() {
+            const generalTimerSpan = document.getElementById('generalTimer');
+            generalTimerSpan.textContent = `Tempo decorrido: ${formatTime(elapsedTime)}`;
+
+            generalTimerInterval = setInterval(() => {
+                elapsedTime++;
+                generalTimerSpan.textContent = `Tempo decorrido: ${formatTime(elapsedTime)}`;
+            }, 1000);
+        }
+
+        function endGeneralTimer() {
+            if (generalTimerInterval !== null) {
+                clearInterval(generalTimerInterval);
+                generalTimerInterval = null;
+            }
+            document.getElementById('generalTimer').textContent = ` Tempo encerrado após ${formatTime(elapsedTime)}`;
+            document.getElementById('endButton').style.display = 'none';
+        }
+
+        function checkAllExercisesCompleted() {
+            const allGroups = document.querySelectorAll('.exercise-group');
+            let allCompleted = true;
+            allGroups.forEach(group => {
+                const completedCount = group.querySelectorAll('.completed').length;
+                const totalCount = group.querySelectorAll('li').length;
+                if (completedCount !== totalCount) {
+                    allCompleted = false;
+                }
+            });
+            if (allCompleted) {
+                endGeneralTimer();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supino Reto</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: grey;
+        }
+        .timer {
+            font-size: 0.9em;
+            color: red;
+            margin-left: 10px;
+        }
+        .skip-button {
+            margin-left: 10px;
+            font-size: 0.8em;
+            padding: 3px 6px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Supino Reto</h1>
+    <ol>
+        <li>
+            <label><input type="checkbox" onclick="toggleCompleted(this)"> Peso 20 kg</label>
+            <span class="timer"></span>
+            <button class="skip-button" onclick="skipTimer(this)" style="display: none;">Pular descanço</button>
+        </li>
+        <li>
+            <label><input type="checkbox" onclick="toggleCompleted(this)"> Peso 20 kg</label>
+            <span class="timer"></span>
+            <button class="skip-button" onclick="skipTimer(this)" style="display: none;">Pular descanço</button>
+        </li>
+        <li>
+            <label><input type="checkbox" onclick="toggleCompleted(this)"> Peso 20 kg</label>
+            <span class="timer"></span>
+            <button class="skip-button" onclick="skipTimer(this)" style="display: none;">Pular descanço</button>
+        </li>
+        <li>
+            <label><input type="checkbox" onclick="toggleCompleted(this)"> Peso 20 kg</label>
+            <span class="timer"></span>
+            <button class="skip-button" onclick="skipTimer(this)" style="display: none;">Pular descanço</button>
+        </li>
+    </ol>
+
+    <script>
+        let activeTimer = null;
+
+        function toggleCompleted(checkbox) {
+            const listItem = checkbox.parentElement;
+            const timerSpan = listItem.nextElementSibling;
+            const skipButton = listItem.nextElementSibling.nextElementSibling;
+
+            if (checkbox.checked) {
+                if (activeTimer !== null) {
+                    alert('Ei! Calma ai cowboy, descanse primeiro e depois comece a próxima série');
+                    checkbox.checked = false;
+                    return;
+                }
+                listItem.classList.add('completed');
+                skipButton.style.display = 'inline';
+                startTimer(timerSpan, skipButton);
+            } else {
+                listItem.classList.remove('completed');
+                if (activeTimer !== null) {
+                    clearInterval(activeTimer);
+                    activeTimer = null;
+                }
+                timerSpan.textContent = '';
+                skipButton.style.display = 'none';
+            }
+        }
+
+        function startTimer(timerSpan, skipButton) {
+            let timeLeft = 60;
+            timerSpan.textContent = ` ${timeLeft} segundos`;
+
+            activeTimer = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    timerSpan.textContent = ` ${timeLeft} segundos`;
+                } else {
+                    clearInterval(activeTimer);
+                    activeTimer = null;
+                    timerSpan.textContent = ' Pode começar a próxima série';
+                    skipButton.style.display = 'none';
+                }
+            }, 1000); // 1000 milliseconds = 1 second
+        }
+
+        function skipTimer(button) {
+            if (activeTimer !== null) {
+                clearInterval(activeTimer);
+                activeTimer = null;
+            }
+            const listItem = button.previousElementSibling.previousElementSibling.parentElement;
+            const timerSpan = button.previousElementSibling;
+            timerSpan.textContent = ' Pode começar a próxima série';
+            button.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
