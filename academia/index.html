@@ -1,10 +1,98 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicativo da Academia</title>
+    <title>Gerenciamento de Treinos</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .fichas {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .fichas button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .fichas button:hover {
+            background-color: #0056b3;
+        }
+
+        .fichas button.active {
+            background-color: #28a745;
+        }
+
+        .ficha {
+            margin-bottom: 20px;
+        }
+
+        .ficha h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+
+        .ficha ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .ficha ul li {
+            margin-bottom: 10px;
+        }
+
+        .btn-start {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            cursor: not-allowed;
+            border: none;
+            background-color: #6c757d;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-start.enabled {
+            background-color: #28a745;
+            cursor: pointer;
+        }
+
+        /*CODIGOS DA ORIGEM INDEX.HTML*/
+
         li {
             padding: 10px;
         }
@@ -13,9 +101,11 @@
             color: grey;
         }
         .timer {
-            font-size: 0.9em;
-            color: lightseagreen;
-            margin-left: 10px;
+            font-size: 18px;
+            color: #28a745;
+            text-align: center;
+            font-weight: bold;
+            margin: 10px;
         }
         .skip-button {
             margin-left: 10px;
@@ -58,618 +148,658 @@
             background-color: #008CBA;
         }
         /*li{border: dotted black;width: 250px}*/
-        div{width: 370px}
+        img {
+            text-align: center;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
-    <h1>Gerenciamento dos Treinos da Academia</h1>
-    <p>O objetivo desta aplicação é que eu possa fazer os treinos da academia com o acompanhamento gerenciado por esta aplicação</p>
-    <p>Será utilizado como base o app Treino utilizado na época em que eu treinava na academia Ironberg de São Caetano do Sul</p>
+    <div class="container">
+        <h2>Gerenciamento de Treinos</h2>
 
-    <ul>
-        <li>Ficha A</li>
-        <li>Ficha B</li>
-        <li>Ficha C</li>
-        <li>Ficha D</li>
-    </ul>
+        <div class="fichas">
+            <button data-target="fichaA">Ficha A</button>
+            <button data-target="fichaB">Ficha B</button>
+            <button data-target="fichaC">Ficha C</button>
+            <button data-target="fichaD">Ficha D</button>
+        </div>
 
-    <button id="startButton" onclick="startExercises()" class="button_timer">Iniciar Treino</button>
-    <span id="generalTimer" class="timer" style="display: none;"></span>
-    
-    <!-- FICHA A - INÍCIO -->
-    <h1>Ficha A - Treino de Peito, Triceps e Ombro</h1>
-    <ol id="exerciseList">
-        <li>Supino Reto</li>
-        <li>Crucifixo Declinado</li>
-        <li>Crucifixo Inclinado</li>
-        <li>Desenvolvimento - Ombros</li>
-        <li>Triceps Cross(barra W)</li>
-        <li>Triceps Francês</li>
-        <li>Triceps Coice Cross</li>
-        <li>Elevação Lateral</li>
-        <li>Elevação Lateral - Sentado</li>
-        <li>Encolhimento - Trapézio</li>
-    </ol>
+        <button id="btnStart" class="button_timer btn-start" disabled>Iniciar Treino</button>
+        <span id="generalTimer" class="timer" style="display: none;"></span>
 
-    <div class="exercise-group" data-group-id="supinoReto" onclick="tryActivateGroup('supinoReto')">
-        <h1>Supino Reto<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/supino-reto.webp" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
+        <div id="fichaA" class="ficha">
+        <!-- FICHA A - INÍCIO -->
+            <h3>Ficha A - Treino de Peito, Triceps e Ombro</h3>
+            <ol id="exerciseList">
+                <li>Supino Reto</li>
+                <li>Crucifixo Declinado</li>
+                <li>Crucifixo Inclinado</li>
+                <li>Desenvolvimento - Ombros</li>
+                <li>Triceps Cross(barra W)</li>
+                <li>Triceps Francês</li>
+                <li>Triceps Coice Cross</li>
+                <li>Elevação Lateral</li>
+                <li>Elevação Lateral - Sentado</li>
+                <li>Encolhimento - Trapézio</li>
+            </ol>
+
+            <div class="exercise-group" data-group-id="supinoReto" onclick="tryActivateGroup('supinoReto')">
+                <h2>Supino Reto<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/supino-reto.webp" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="crucifixoDeclinado" onclick="tryActivateGroup('crucifixoDeclinado')">
+                <h2>Crucifixo Declinado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/crucifixo-declinado.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoDeclinado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoDeclinado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoDeclinado', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoDeclinado', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="crucifixoInclinado" onclick="tryActivateGroup('crucifixoInclinado')">
+                <h2>Crucifixo Inclinado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/crucifixo-inclinado.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoInclinado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoInclinado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoInclinado', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoInclinado', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="desenvolvimentoOmbro" onclick="tryActivateGroup('desenvolvimentoOmbro')">
+                <h2>Desenvolvimento<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/desenvolvimento-ombro.webp" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('desenvolvimentoOmbro', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('desenvolvimentoOmbro', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('desenvolvimentoOmbro', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('desenvolvimentoOmbro', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="tricepsCross" onclick="tryActivateGroup('tricepsCross')">
+                <h2>Triceps Cross(Barra W)<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/triceps-pulley.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="35" onchange="saveWeight('tricepsCross', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="35" onchange="saveWeight('tricepsCross', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="35" onchange="saveWeight('tricepsCross', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="35" onchange="saveWeight('tricepsCross', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="tricepsFrances" onclick="tryActivateGroup('tricepsFrances')">
+                <h2>Triceps Francês<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/triceps-frances.webp" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('tricepsFrances', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('tricepsFrances', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('tricepsFrances', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('tricepsFrances', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="tricepsCoice" onclick="tryActivateGroup('tricepsCoice')">
+                <h2>Triceps Coice Cross<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/triceps-coice.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('tricepsCoice', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('tricepsCoice', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('tricepsCoice', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('tricepsCoice', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="elevacaoLateral" onclick="tryActivateGroup('elevacaoLateral')">
+                <h2>Elevação Lateral<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/elevacao-lateral.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateral', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateral', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateral', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateral', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="elevacaoLateralSentado" onclick="tryActivateGroup('elevacaoLateralSentado')">
+                <h2>Elevação Sentado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/elevacao-lateral-sentado.gif" alt=""/>
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateralSentado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateralSentado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateralSentado', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateralSentado', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="encolhimento" onclick="tryActivateGroup('encolhimento')">
+                <h2>Encolhimento<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/encolhimento.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="22" onchange="saveWeight('encolhimento', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="22" onchange="saveWeight('encolhimento', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="22" onchange="saveWeight('encolhimento', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="22" onchange="saveWeight('encolhimento', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+        <!-- FICHA A - FIM -->
+        </div>
+
+        <div id="fichaB" class="ficha">
+        <!-- FICHA B - INÍCIO -->
+            <h3>Ficha B - Quadriceps, Gluteos e Abdominal</h3>
+            <ol>
+                <li>Leg Press 45º</li>
+                <li>Agachamento Pendulo</li>
+                <li>Afundo Smith</li>
+                <li>Elevação Pelvica</li>
+                <li>Cadeira Abdutora</li>
+                <li>Abdominal 1</li>
+                <li>Abdominal 2</li>
+            </ol>
+
+            <div class="exercise-group" data-group-id="legPress" onclick="tryActivateGroup('legPress')">
+                <h2>Leg Press 45º<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/leg-press.webp" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="80" onchange="saveWeight('legPress', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="80" onchange="saveWeight('legPress', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="80" onchange="saveWeight('legPress', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="80" onchange="saveWeight('legPress', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="agachamentoPendulo" onclick="tryActivateGroup('agachamentoPendulo')">
+                <h2>Agachamento Pendulo<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/agachamento-pendulo.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="afundoSmith" onclick="tryActivateGroup('afundoSmith')">
+                <h2>Afundo Smith<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/afundo-smith.webp" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('afundoSmith', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('afundoSmith', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('afundoSmith', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('afundoSmith', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="elevacaoPelvica" onclick="tryActivateGroup('elevacaoPelvica')">
+                <h2>Elevação Pélvica<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/elevacao-pelvica.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="30" onchange="saveWeight('elevacaoPelvica', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="30" onchange="saveWeight('elevacaoPelvica', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="30" onchange="saveWeight('elevacaoPelvica', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="30" onchange="saveWeight('elevacaoPelvica', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="cadeiraAbdutora" onclick="tryActivateGroup('cadeiraAbdutora')">
+                <h2>Cadeira Abdutora<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/cadeira-abdutora.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('cadeiraAbdutora', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('cadeiraAbdutora', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('cadeiraAbdutora', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('cadeiraAbdutora', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="abdominalInfra" onclick="tryActivateGroup('abdominalInfra')">
+                <h2>Abdominal Infra<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/abdominal-infra.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInfra', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInfra', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInfra', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInfra', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="abdominalInclinado" onclick="tryActivateGroup('abdominalInclinado')">
+                <h2>Abdominal Inclinado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/abdominal-inclinado.webp" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInclinado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInclinado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInclinado', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInclinado', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+        <!-- FICHA B - FIM -->
+        </div>
+
+        <div id="fichaC" class="ficha">
+        <!-- FICHA C - INÍCIO -->
+            <h3>Ficha C - Costas e Bíceps</h3>
+            <ol>
+                <li>Puxada Frente</li>
+                <li>Puxada Supinada</li>
+                <li>Remada Triângulo</li>
+                <li>Pull Down Cross</li>
+                <li>Rosca Direta Maquina</li>
+                <li>Rosca Scott Máquina</li>
+                <li>Rosca Direta (Cross) - Unilateral</li>
+            </ol>
+
+            <div class="exercise-group" data-group-id="puxadaFrente" onclick="tryActivateGroup('puxadaFrente')">
+                <h2>Puxada Frente<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/puxada-frente.webp" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaFrente', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaFrente', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaFrente', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaFrente', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+
+            <div class="exercise-group" data-group-id="puxadaSupinada" onclick="tryActivateGroup('puxadaSupinada')">
+                <h2>Puxada Supinada<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/puxada-supinada.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaSupinada', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaSupinada', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaSupinada', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaSupinada', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="remadaTriangulo" onclick="tryActivateGroup('remadaTriangulo')">
+                <h2>Remada Triângulo<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/remada-triangulo.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('remadaTriangulo', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('remadaTriangulo', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('remadaTriangulo', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('remadaTriangulo', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="remadaCavalinho" onclick="tryActivateGroup('remadaCavalinho')">
+                <h2>Pull Down Cross<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/remada-cavalinho.webp" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="25" onchange="saveWeight('remadaCavalinho', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="25" onchange="saveWeight('remadaCavalinho', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="25" onchange="saveWeight('remadaCavalinho', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="25" onchange="saveWeight('remadaCavalinho', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="roscaDireta" onclick="tryActivateGroup('roscaDireta')">
+                <h2>Rosca Direta<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/rosca-direta.webp" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaDireta', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaDireta', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaDireta', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaDireta', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="roscaScott" onclick="tryActivateGroup('roscaScott')">
+                <h2>Rosca Scott<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/rosca-scott.webp" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaScott', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaScott', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaScott', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaScott', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="roscaCross" onclick="tryActivateGroup('roscaCross')">
+                <h2>Rosca Cross<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/rosca-unilateral.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('roscaCross', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('roscaCross', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('roscaCross', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('roscaCross', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+        <!-- FICHA C - FIM -->
+        </div>
+
+        <div id="fichaD" class="ficha">
+        <!-- FICHA D - INÍCIO -->
+            <h3>Ficha D - Posterior e Panturrilha</h3>
+            <ol>
+                <li>Cadeira Flexora</li>
+                <li>Mesa Flexora</li>
+                <li>Stiff No Belt Com Triângulo</li>
+                <li>Panturrilha em Pé</li>
+                <li>Panturrilha Sentado</li>
+                <li>Panturrilha Horizontal</li>
+                <li>Cadeira Adutora</li>
+            </ol>
+
+            <div class="exercise-group" data-group-id="cadeiraFlexora" onclick="tryActivateGroup('cadeiraFlexora')">
+                <h2>Cadeira Flexora<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/cadeira-flexora.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="50" onchange="saveWeight('cadeiraFlexora', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="50" onchange="saveWeight('cadeiraFlexora', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="50" onchange="saveWeight('cadeiraFlexora', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="50" onchange="saveWeight('cadeiraFlexora', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="mesaFlexora" onclick="tryActivateGroup('mesaFlexora')">
+                <h2>Mesa Flexora<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/mesa-flexora.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('mesaFlexora', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('mesaFlexora', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('mesaFlexora', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('mesaFlexora', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="stiffBelt" onclick="tryActivateGroup('stiffBelt')">
+                <h2>Stiff no Belt<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/stiff.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('stiffBelt', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('stiffBelt', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('stiffBelt', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('stiffBelt', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="panturrilhaPe" onclick="tryActivateGroup('panturrilhaPe')">
+                <h2>Panturrilha em Pé<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/panturrilha-pe.webp" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('panturrilhaPe', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('panturrilhaPe', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('panturrilhaPe', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('panturrilhaPe', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="panturrilhaSentado" onclick="tryActivateGroup('panturrilhaSentado')">
+                <h2>Panturrilha Sentado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/panturrilha-sentado.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('panturrilhaSentado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('panturrilhaSentado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('panturrilhaSentado', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('panturrilhaSentado', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="panturrilhaHorizontal" onclick="tryActivateGroup('panturrilhaHorizontal')">
+                <h2>Panturrilha Horizontal<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/panturrilha-horizontal.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('panturrilhaHorizontal', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('panturrilhaHorizontal', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('panturrilhaHorizontal', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('panturrilhaHorizontal', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+
+            <div class="exercise-group" data-group-id="cadeiraAdutora" onclick="tryActivateGroup('cadeiraAdutora')">
+                <h2>Cadeira Adutora<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
+                <img width="340px" src="imagens/cadeira-adutora.gif" alt="">
+                <ol class="exercise-list disabled">
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('cadeiraAdutora', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('cadeiraAdutora', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('cadeiraAdutora', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                    <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('cadeiraAdutora', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
+                </ol>
+            </div>
+        <!-- FICHA D - FIM -->
+        </div>
+        <button id="endButton" onclick="endGeneralTimer()" class="button_timer btn-start">Finalizar Treino</button>
     </div>
 
-    <div class="exercise-group" data-group-id="crucifixoDeclinado" onclick="tryActivateGroup('crucifixoDeclinado')">
-        <h1>Crucifixo Declinado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/crucifixo-declinado.gif" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoDeclinado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoDeclinado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoDeclinado', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoDeclinado', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
+    <script>
+        let activeSeriesTimer = null;
+        let generalTimerInterval = null;
+        let elapsedTime = 0;
+        let currentTimerSpan = null;
+        let currentCheckbox = null;
+        let currentGroup = null;
+        let exercisesStarted = false; // Flag para indicar se os exercícios foram iniciados
 
-    <div class="exercise-group" data-group-id="crucifixoInclinado" onclick="tryActivateGroup('crucifixoInclinado')">
-        <h1>Crucifixo Inclinado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/crucifixo-inclinado.gif" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoInclinado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoInclinado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoInclinado', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoInclinado', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
+        document.addEventListener("DOMContentLoaded", () => {
+            loadWeights();
+        });
 
-    <div class="exercise-group" data-group-id="desenvolvimentoOmbro" onclick="tryActivateGroup('desenvolvimentoOmbro')">
-        <h1>Desenvolvimento<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/desenvolvimento-ombro.webp" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('desenvolvimentoOmbro', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('desenvolvimentoOmbro', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('desenvolvimentoOmbro', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('desenvolvimentoOmbro', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
+        function saveWeight(group, index, value) {
+            const key = `${group}_weight_${index}`;
+            localStorage.setItem(key, value);
+        }
 
-    <div class="exercise-group" data-group-id="tricepsCross" onclick="tryActivateGroup('tricepsCross')">
-        <h1>Triceps Cross(Barra W)<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/triceps-pulley.gif" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="35" onchange="saveWeight('tricepsCross', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="35" onchange="saveWeight('tricepsCross', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="35" onchange="saveWeight('tricepsCross', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="35" onchange="saveWeight('tricepsCross', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
+        function loadWeights() {
+            const groups = document.querySelectorAll(".exercise-group");
+            groups.forEach(group => {
+                const groupId = group.dataset.groupId;
+                const inputs = group.querySelectorAll("input[type='number']");
+                inputs.forEach((input, index) => {
+                    const key = `${groupId}_weight_${index}`;
+                    const savedValue = localStorage.getItem(key);
+                    if (savedValue !== null) {
+                        input.value = savedValue;
+                    }
+                });
+            });
+        }
 
-    <div class="exercise-group" data-group-id="tricepsFrances" onclick="tryActivateGroup('tricepsFrances')">
-        <h1>Triceps Francês<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/triceps-frances.webp" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('tricepsFrances', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('tricepsFrances', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('tricepsFrances', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('tricepsFrances', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
+        function tryActivateGroup(groupId) {
+            if (!exercisesStarted) return; // Não faz nada se os exercícios não foram iniciados
+            activateGroup(groupId);
+        }
 
-    <div class="exercise-group" data-group-id="tricepsCoice" onclick="tryActivateGroup('tricepsCoice')">
-        <h1>Triceps Coice Cross<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/triceps-coice.gif" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('tricepsCoice', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('tricepsCoice', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('tricepsCoice', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('tricepsCoice', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
-
-    <div class="exercise-group" data-group-id="elevacaoLateral" onclick="tryActivateGroup('elevacaoLateral')">
-        <h1>Elevação Lateral<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/elevacao-lateral.gif" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateral', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateral', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateral', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateral', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
-
-    <div class="exercise-group" data-group-id="elevacaoLateralSentado" onclick="tryActivateGroup('elevacaoLateralSentado')">
-        <h1>Elevação Sentado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/elevacao-lateral-sentado.gif" alt=""/>
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateralSentado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateralSentado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateralSentado', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateralSentado', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
-
-    <div class="exercise-group" data-group-id="encolhimento" onclick="tryActivateGroup('encolhimento')">
-        <h1>Encolhimento<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/encolhimento.gif" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="22" onchange="saveWeight('encolhimento', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="22" onchange="saveWeight('encolhimento', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="22" onchange="saveWeight('encolhimento', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="22" onchange="saveWeight('encolhimento', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
-<!-- FICHA A - FIM -->
-
-<!-- FICHA B - INÍCIO -->
-    <h1>Ficha B - Quadriceps, Gluteos e Abdominal</h1>
-    <ol>
-        <li>Leg Press 45º</li>
-        <li>Agachamento Pendulo</li>
-        <li>Afundo Smith</li>
-        <li>Elevação Pelvica</li>
-        <li>Cadeira Abdutora</li>
-        <li>Abdominal 1</li>
-        <li>Abdominal 2</li>
-    </ol>
-
-    <div class="exercise-group" data-group-id="legPress" onclick="tryActivateGroup('legPress')">
-        <h1>Leg Press 45º<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/leg-press.webp" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="80" onchange="saveWeight('legPress', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="80" onchange="saveWeight('legPress', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="80" onchange="saveWeight('legPress', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="80" onchange="saveWeight('legPress', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
-
-    <div class="exercise-group" data-group-id="agachamentoPendulo" onclick="tryActivateGroup('agachamentoPendulo')">
-        <h1>Agachamento Pendulo<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/agachamento-pendulo.gif" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
-
-    <div class="exercise-group" data-group-id="afundoSmith" onclick="tryActivateGroup('afundoSmith')">
-        <h1>Afundo Smith<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/afundo-smith.webp" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('afundoSmith', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('afundoSmith', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('afundoSmith', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('afundoSmith', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
-
-    <div class="exercise-group" data-group-id="elevacaoPelvica" onclick="tryActivateGroup('elevacaoPelvica')">
-        <h1>Elevação Pélvica<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/elevacao-pelvica.gif" width='360px' alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="30" onchange="saveWeight('elevacaoPelvica', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="30" onchange="saveWeight('elevacaoPelvica', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="30" onchange="saveWeight('elevacaoPelvica', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="30" onchange="saveWeight('elevacaoPelvica', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
-
-    <div class="exercise-group" data-group-id="cadeiraAbdutora" onclick="tryActivateGroup('cadeiraAbdutora')">
-        <h1>Cadeira Abdutora<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/cadeira-abdutora.gif" width="360px" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('cadeiraAbdutora', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('cadeiraAbdutora', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('cadeiraAbdutora', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('cadeiraAbdutora', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
-
-    <div class="exercise-group" data-group-id="abdominalInfra" onclick="tryActivateGroup('abdominalInfra')">
-        <h1>Abdominal Infra<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/abdominal-infra.gif" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInfra', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInfra', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInfra', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInfra', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
-
-    <div class="exercise-group" data-group-id="abdominalInclinado" onclick="tryActivateGroup('abdominalInclinado')">
-        <h1>Abdominal Inclinado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-        <img src="imagens/abdominal-inclinado.webp" alt="">
-        <ol class="exercise-list disabled">
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInclinado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInclinado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInclinado', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-            <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInclinado', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        </ol>
-    </div>
-<!-- FICHA B - FIM -->
-
-<!-- FICHA C - INÍCIO -->
-<h1>Ficha C - Costas e Bíceps</h1>
-<ol>
-    <li>Puxada Frente</li>
-    <li>Puxada Supinada</li>
-    <li>Remada Triângulo</li>
-    <li>Pull Down Cross</li>
-    <li>Rosca Direta Maquina</li>
-    <li>Rosca Scott Máquina</li>
-    <li>Rosca Direta (Cross) - Unilateral</li>
-</ol>
-
-<div class="exercise-group" data-group-id="puxadaFrente" onclick="tryActivateGroup('puxadaFrente')">
-    <h1>Puxada Frente<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/puxada-frente.webp" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaFrente', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaFrente', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaFrente', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaFrente', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-
-
-<div class="exercise-group" data-group-id="puxadaSupinada" onclick="tryActivateGroup('puxadaSupinada')">
-    <h1>Puxada Supinada<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/puxada-supinada.gif" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaSupinada', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaSupinada', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaSupinada', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaSupinada', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-
-<div class="exercise-group" data-group-id="remadaTriangulo" onclick="tryActivateGroup('remadaTriangulo')">
-    <h1>Remada Triângulo<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/remada-triangulo.gif" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('remadaTriangulo', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('remadaTriangulo', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('remadaTriangulo', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('remadaTriangulo', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-
-<div class="exercise-group" data-group-id="remadaCavalinho" onclick="tryActivateGroup('remadaCavalinho')">
-    <h1>Pull Down Cross<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/remada-cavalinho.webp" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="25" onchange="saveWeight('remadaCavalinho', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="25" onchange="saveWeight('remadaCavalinho', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="25" onchange="saveWeight('remadaCavalinho', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="25" onchange="saveWeight('remadaCavalinho', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-
-<div class="exercise-group" data-group-id="roscaDireta" onclick="tryActivateGroup('roscaDireta')">
-    <h1>Rosca Direta<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/rosca-direta.webp" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaDireta', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaDireta', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaDireta', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaDireta', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-
-<div class="exercise-group" data-group-id="roscaScott" onclick="tryActivateGroup('roscaScott')">
-    <h1>Rosca Scott<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/rosca-scott.webp" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaScott', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaScott', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaScott', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaScott', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-
-<div class="exercise-group" data-group-id="roscaCross" onclick="tryActivateGroup('roscaCross')">
-    <h1>Rosca Cross<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/rosca-unilateral.gif" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('roscaCross', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('roscaCross', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('roscaCross', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('roscaCross', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-<!-- FICHA C - FIM -->
-
-<!-- FICHA D - INÍCIO -->
-<h1>Ficha D - Posterior e Panturrilha</h1>
-<ol>
-    <li>Cadeira Flexora</li>
-    <li>Mesa Flexora</li>
-    <li>Stiff No Belt Com Triângulo</li>
-    <li>Panturrilha em Pé</li>
-    <li>Panturrilha Sentado</li>
-    <li>Panturrilha Horizontal</li>
-    <li>Cadeira Adutora</li>
-</ol>
-
-<div class="exercise-group" data-group-id="cadeiraFlexora" onclick="tryActivateGroup('cadeiraFlexora')">
-    <h1>Cadeira Flexora<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/cadeira-flexora.gif" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="50" onchange="saveWeight('cadeiraFlexora', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="50" onchange="saveWeight('cadeiraFlexora', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="50" onchange="saveWeight('cadeiraFlexora', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="50" onchange="saveWeight('cadeiraFlexora', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-
-<div class="exercise-group" data-group-id="mesaFlexora" onclick="tryActivateGroup('mesaFlexora')">
-    <h1>Mesa Flexora<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/mesa-flexora.gif" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('mesaFlexora', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('mesaFlexora', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('mesaFlexora', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('mesaFlexora', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-
-<div class="exercise-group" data-group-id="stiffBelt" onclick="tryActivateGroup('stiffBelt')">
-    <h1>Stiff no Belt<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/stiff.gif" width="360px" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('stiffBelt', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('stiffBelt', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('stiffBelt', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('stiffBelt', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-
-<div class="exercise-group" data-group-id="panturrilhaPe" onclick="tryActivateGroup('panturrilhaPe')">
-    <h1>Panturrilha em Pé<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/panturrilha-pe.webp" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('panturrilhaPe', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('panturrilhaPe', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('panturrilhaPe', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('panturrilhaPe', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-
-<div class="exercise-group" data-group-id="panturrilhaSentado" onclick="tryActivateGroup('panturrilhaSentado')">
-    <h1>Panturrilha Sentado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/panturrilha-sentado.gif" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('panturrilhaSentado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('panturrilhaSentado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('panturrilhaSentado', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('panturrilhaSentado', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-
-<div class="exercise-group" data-group-id="panturrilhaHorizontal" onclick="tryActivateGroup('panturrilhaHorizontal')">
-    <h1>Panturrilha Horizontal<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/panturrilha-horizontal.gif" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('panturrilhaHorizontal', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('panturrilhaHorizontal', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('panturrilhaHorizontal', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('panturrilhaHorizontal', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-
-<div class="exercise-group" data-group-id="cadeiraAdutora" onclick="tryActivateGroup('cadeiraAdutora')">
-    <h1>Cadeira Adutora<button class="skip-button" onclick="skipTimer(this)">Pular</button></h1>
-    <img src="imagens/cadeira-adutora.gif" alt="">
-    <ol class="exercise-list disabled">
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('cadeiraAdutora', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('cadeiraAdutora', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('cadeiraAdutora', 2, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-        <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('cadeiraAdutora', 3, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
-    </ol>
-</div>
-<!-- FICHA D - FIM -->
-
-<button id="endButton" onclick="endGeneralTimer()" style="display: none;" class="button_timer">Finalizar Treino</button>
-
-<script>
-    let activeSeriesTimer = null;
-    let generalTimerInterval = null;
-    let elapsedTime = 0;
-    let currentTimerSpan = null;
-    let currentCheckbox = null;
-    let currentGroup = null;
-    let exercisesStarted = false; // Flag para indicar se os exercícios foram iniciados
-
-    document.addEventListener("DOMContentLoaded", () => {
-        loadWeights();
-    });
-
-    function saveWeight(group, index, value) {
-        const key = `${group}_weight_${index}`;
-        localStorage.setItem(key, value);
-    }
-
-    function loadWeights() {
-        const groups = document.querySelectorAll(".exercise-group");
-        groups.forEach(group => {
-            const groupId = group.dataset.groupId;
-            const inputs = group.querySelectorAll("input[type='number']");
-            inputs.forEach((input, index) => {
-                const key = `${groupId}_weight_${index}`;
-                const savedValue = localStorage.getItem(key);
-                if (savedValue !== null) {
-                    input.value = savedValue;
+        function activateGroup(groupId) {
+            const group = document.querySelector(`.exercise-group[data-group-id="${groupId}"]`);
+            if (group) {
+                if (currentGroup) {
+                    deactivateGroup(currentGroup);
                 }
+                currentGroup = group;
+                currentGroup.classList.add('active-group');
+                group.querySelector('.exercise-list').classList.remove('disabled');
+                group.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.disabled = false;
+                });
+                group.querySelector('.skip-button').style.display = 'inline';
+                group.querySelector('.skip-button').disabled = false;
+            }
+        }
+
+        function deactivateGroup(group) {
+            group.querySelector('.exercise-list').classList.add('disabled');
+            group.querySelector('.skip-button').style.display = 'none';
+            group.classList.remove('active-group');
+        }
+
+        function toggleCompleted(checkbox) {
+            const listItem = checkbox.parentElement;
+            const timerSpan = listItem.nextElementSibling;
+
+            if (checkbox.checked) {
+                if (activeSeriesTimer !== null) {
+                    checkbox.checked = false;
+                    return;
+                }
+                listItem.classList.add('completed');
+                startSeriesTimer(timerSpan, checkbox);
+            } else {
+                listItem.classList.remove('completed');
+                if (activeSeriesTimer !== null) {
+                    clearInterval(activeSeriesTimer);
+                    activeSeriesTimer = null;
+                }
+                timerSpan.textContent = '';
+            }
+        }
+
+        function startSeriesTimer(timerSpan, checkbox) {
+            let timeLeft = 60; // Tempo de descanso em segundos
+            timerSpan.textContent = ` ${timeLeft}s`;
+
+            currentTimerSpan = timerSpan;
+            currentCheckbox = checkbox;
+
+            document.querySelectorAll('.skip-button').forEach(button => button.disabled = false);
+
+            activeSeriesTimer = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    timerSpan.textContent = ` ${timeLeft}s`;
+                } else {
+                    clearInterval(activeSeriesTimer);
+                    activeSeriesTimer = null;
+                    timerSpan.textContent = 'Finalizado';
+                    document.querySelectorAll('.skip-button').forEach(button => button.disabled = true);
+                    updateSeriesCompletion(checkbox);
+
+                    // Vibração ao término do descanso
+                    if (navigator.vibrate) {
+                        navigator.vibrate(200); // Vibra por 200 milissegundos
+                    }
+                }
+            }, 1000);
+        }
+
+        function skipTimer(button) {
+            if (activeSeriesTimer !== null) {
+                clearInterval(activeSeriesTimer);
+                activeSeriesTimer = null;
+            }
+            if (currentTimerSpan !== null) {
+                currentTimerSpan.textContent = 'Finalizado';
+            }
+            if (currentCheckbox !== null) {
+                currentCheckbox.disabled = true;
+            }
+            button.disabled = true;
+            updateSeriesCompletion(currentCheckbox);
+        }
+
+        function updateSeriesCompletion(checkbox) {
+            const group = checkbox.closest('.exercise-group');
+            const completedCount = group.querySelectorAll('.completed').length;
+            const totalCount = group.querySelectorAll('li').length;
+
+            if (completedCount === totalCount) {
+                deactivateGroup(group);
+                moveToNextGroup();
+            }
+        }
+
+        function moveToNextGroup() {
+            const groups = Array.from(document.querySelectorAll('.exercise-group'));
+            const currentIndex = groups.indexOf(currentGroup);
+            let nextGroup = null;
+
+            if (currentIndex < groups.length - 1) {
+                nextGroup = groups[currentIndex + 1];
+            } else {
+                // Se for o último grupo, voltar para o primeiro grupo não completado
+                nextGroup = groups.find(group => !isGroupCompleted(group));
+            }
+
+            if (nextGroup) {
+                activateGroup(nextGroup.dataset.groupId);
+                window.scrollTo({ top: nextGroup.offsetTop, behavior: 'smooth' });
+            }
+        }
+
+        function isGroupCompleted(group) {
+            const completedCount = group.querySelectorAll('.completed').length;
+            const totalCount = group.querySelectorAll('li').length;
+            return completedCount === totalCount;
+        }
+
+        document.querySelectorAll('.fichas button').forEach(button => {
+            button.addEventListener('click', function () {
+                document.querySelectorAll('.fichas button').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                document.querySelectorAll('.ficha').forEach(ficha => ficha.style.display = 'none');
+                const target = document.getElementById(this.dataset.target);
+                target.style.display = 'block';
+
+                const btnStart = document.getElementById('btnStart');
+                btnStart.classList.add('enabled');
+                btnStart.disabled = false;
+
+                target.scrollIntoView({ behavior: 'smooth' });
             });
         });
-    }
 
-    function formatTime(seconds) {
-        const hrs = Math.floor(seconds / 3600);
-        const mins = Math.floor((seconds % 3600) / 60);
-        const secs = seconds % 60;
-        return `${hrs > 0 ? hrs + 'h ' : ''}${mins > 0 ? mins + 'm ' : ''}${secs}s`;
-    }
-
-    function startExercises() {
-        startGeneralTimer();
-        exercisesStarted = true;
-        document.getElementById('startButton').style.display = 'none';
-        document.getElementById('endButton').style.display = 'block';
-        document.getElementById('generalTimer').style.display = 'inline';
-    }
-
-    function tryActivateGroup(groupId) {
-        if (!exercisesStarted) return; // Não faz nada se os exercícios não foram iniciados
-        activateGroup(groupId);
-    }
-
-    function activateGroup(groupId) {
-        const group = document.querySelector(`.exercise-group[data-group-id="${groupId}"]`);
-        if (group) {
-            if (currentGroup) {
-                deactivateGroup(currentGroup);
+        document.getElementById('btnStart').addEventListener('click', function () {
+            if (!this.disabled) {
+                startExercises();
             }
-            currentGroup = group;
-            currentGroup.classList.add('active-group');
-            group.querySelector('.exercise-list').classList.remove('disabled');
-            group.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                checkbox.disabled = false;
-            });
-            group.querySelector('.skip-button').style.display = 'inline';
-            group.querySelector('.skip-button').disabled = false;
+        });
+
+        function startExercises() {
+            startGeneralTimer();
+            exercisesStarted = true;
+            document.getElementById('btnStart').style.display = 'none';
+            document.getElementById('generalTimer').style.display = 'inline';
         }
-    }
 
-    function deactivateGroup(group) {
-        group.querySelector('.exercise-list').classList.add('disabled');
-        group.querySelector('.skip-button').style.display = 'none';
-        group.classList.remove('active-group');
-    }
+        function startGeneralTimer() {
+            const generalTimerSpan = document.getElementById('generalTimer');
+            generalTimerSpan.textContent = `Tempo de treino: ${formatTime(elapsedTime)}`;
 
-    function toggleCompleted(checkbox) {
-        const listItem = checkbox.parentElement;
-        const timerSpan = listItem.nextElementSibling;
+            generalTimerInterval = setInterval(() => {
+                elapsedTime++;
+                generalTimerSpan.textContent = `Tempo de treino: ${formatTime(elapsedTime)}`;
+            }, 1000);
+        }
 
-        if (checkbox.checked) {
-            if (activeSeriesTimer !== null) {
-                checkbox.checked = false;
-                return;
+        function formatTime(seconds) {
+            const hrs = Math.floor(seconds / 3600);
+            const mins = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            return `${hrs > 0 ? hrs + 'h ' : ''}${mins > 0 ? mins + 'm ' : ''}${secs}s`;
+        }
+
+        document.getElementById('endButton').addEventListener('click', function () {
+            if (!this.disabled) {
+                endGeneralTimer();
             }
-            listItem.classList.add('completed');
-            startSeriesTimer(timerSpan, checkbox);
-        } else {
-            listItem.classList.remove('completed');
-            if (activeSeriesTimer !== null) {
-                clearInterval(activeSeriesTimer);
-                activeSeriesTimer = null;
+        });
+
+        function endGeneralTimer() {
+            if (generalTimerInterval !== null) {
+                clearInterval(generalTimerInterval);
+                generalTimerInterval = null;
             }
-            timerSpan.textContent = '';
+            document.getElementById('generalTimer').textContent = ` Tempo encerrado após ${formatTime(elapsedTime)}`;
+            document.getElementById('endButton').style.display = 'none';
         }
-    }
-
-    function startSeriesTimer(timerSpan, checkbox) {
-        let timeLeft = 60; // Tempo de descanso em segundos
-        timerSpan.textContent = ` ${timeLeft}s`;
-
-        currentTimerSpan = timerSpan;
-        currentCheckbox = checkbox;
-
-        document.querySelectorAll('.skip-button').forEach(button => button.disabled = false);
-
-        activeSeriesTimer = setInterval(() => {
-            if (timeLeft > 0) {
-                timeLeft--;
-                timerSpan.textContent = ` ${timeLeft}s`;
-            } else {
-                clearInterval(activeSeriesTimer);
-                activeSeriesTimer = null;
-                timerSpan.textContent = 'Finalizado';
-                document.querySelectorAll('.skip-button').forEach(button => button.disabled = true);
-                updateSeriesCompletion(checkbox);
-
-                // Vibração ao término do descanso
-                if (navigator.vibrate) {
-                    navigator.vibrate(200); // Vibra por 200 milissegundos
-                }
-            }
-        }, 1000);
-    }
-
-    function skipTimer(button) {
-        if (activeSeriesTimer !== null) {
-            clearInterval(activeSeriesTimer);
-            activeSeriesTimer = null;
-        }
-        if (currentTimerSpan !== null) {
-            currentTimerSpan.textContent = 'Finalizado';
-        }
-        if (currentCheckbox !== null) {
-            currentCheckbox.disabled = true;
-        }
-        button.disabled = true;
-        updateSeriesCompletion(currentCheckbox);
-    }
-
-    function updateSeriesCompletion(checkbox) {
-        const group = checkbox.closest('.exercise-group');
-        const completedCount = group.querySelectorAll('.completed').length;
-        const totalCount = group.querySelectorAll('li').length;
-
-        if (completedCount === totalCount) {
-            deactivateGroup(group);
-            moveToNextGroup();
-        }
-    }
-
-    function moveToNextGroup() {
-        const groups = Array.from(document.querySelectorAll('.exercise-group'));
-        const currentIndex = groups.indexOf(currentGroup);
-        let nextGroup = null;
-
-        if (currentIndex < groups.length - 1) {
-            nextGroup = groups[currentIndex + 1];
-        } else {
-            // Se for o último grupo, voltar para o primeiro grupo não completado
-            nextGroup = groups.find(group => !isGroupCompleted(group));
-        }
-
-        if (nextGroup) {
-            activateGroup(nextGroup.dataset.groupId);
-            window.scrollTo({ top: nextGroup.offsetTop, behavior: 'smooth' });
-        }
-    }
-
-    function isGroupCompleted(group) {
-        const completedCount = group.querySelectorAll('.completed').length;
-        const totalCount = group.querySelectorAll('li').length;
-        return completedCount === totalCount;
-    }
-
-    function startGeneralTimer() {
-        const generalTimerSpan = document.getElementById('generalTimer');
-        generalTimerSpan.textContent = `Tempo decorrido: ${formatTime(elapsedTime)}`;
-
-        generalTimerInterval = setInterval(() => {
-            elapsedTime++;
-            generalTimerSpan.textContent = `Tempo decorrido: ${formatTime(elapsedTime)}`;
-        }, 1000);
-    }
-
-    function endGeneralTimer() {
-        if (generalTimerInterval !== null) {
-            clearInterval(generalTimerInterval);
-            generalTimerInterval = null;
-        }
-        document.getElementById('generalTimer').textContent = ` Tempo encerrado após ${formatTime(elapsedTime)}`;
-        document.getElementById('endButton').style.display = 'none';
-    }
-</script>
-
+        // Inicialmente esconde todas as fichas
+        document.querySelectorAll('.ficha').forEach(ficha => ficha.style.display = 'none');
+    </script>
 </body>
+
 </html>
