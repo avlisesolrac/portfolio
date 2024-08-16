@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoramento de Atividades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .input-field {
+            margin-bottom: 20px;
+        }
+
+        .input-field label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .input-field input {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            position: relative;
+        }
+
+        th {
+            background-color: #f8f8f8;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button.start {
+            background-color: #007bff;
+            color: white;
+        }
+
+        button.stop {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        button.remove-button {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        button.calculate {
+            background-color: #007bff;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        #total-time {
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .manual-time-input {
+            width: 80px;
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .manual-time-cell {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Monitoramento de Atividades</h1>
+
+<div class="input-field">
+    <label for="razao-social">Razão Social: </label>
+    <input type="text" id="razao-social" placeholder="Digite a razão social">
+</div>
+
+<div class="section">
+    <h2>Migrador</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Atividade</th>
+                <th>Ação</th>
+                <th>Tempo Gasto</th>
+                <th>Remover</th>
+            </tr>
+        </thead>
+        <tbody id="section0">
+            <!-- Atividades da Seção Migrador -->
+        </tbody>
+    </table>
+</div>
+
+<div class="section">
+    <h2>Instalação e Configuração Inicial</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Atividade</th>
+                <th>Ação</th>
+                <th>Tempo Gasto</th>
+                <th>Remover</th>
+            </tr>
+        </thead>
+        <tbody id="section1">
+            <!-- Atividades da Seção 1 -->
+        </tbody>
+    </table>
+</div>
+
+<div class="section">
+    <h2>Validações e Ajustes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Atividade</th>
+                <th>Ação</th>
+                <th>Tempo Gasto</th>
+                <th>Remover</th>
+            </tr>
+        </thead>
+        <tbody id="section2">
+            <!-- Atividades da Seção 2 -->
+        </tbody>
+    </table>
+</div>
+
+<div class="section">
+    <h2>Configurações Adicionais</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Atividade</th>
+                <th>Ação</th>
+                <th>Tempo Gasto</th>
+                <th>Remover</th>
+            </tr>
+        </thead>
+        <tbody id="section3">
+            <!-- Atividades da Seção 3 -->
+        </tbody>
+    </table>
+</div>
+
+<div class="section">
+    <h2>Validações Finais</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Atividade</th>
+                <th>Ação</th>
+                <th>Tempo Gasto</th>
+                <th>Remover</th>
+            </tr>
+        </thead>
+        <tbody id="section4">
+            <!-- Atividades da Seção 4 -->
+        </tbody>
+    </table>
+</div>
+
+<button class="calculate" onclick="calculateTotalTime()">Calcular Tempo Total</button>
+<p id="total-time"></p>
+
+<script>
+    const items = {
+        section0: [
+            "Importação da Aplicação",
+            "Importação do Banco de Dados",
+            "Restore do TSS de Nota",
+            "Restore do TSS do TAF"
+        ],
+        section1: [
+            "Instalar Google Chrome na VM",
+            "Baixar DBEAVER",
+            "Migrar License de S.O. se for Prime",
+            "Restaurar lsnumber.val",
+            "Atualização do S.O.",
+            "Reiniciar VMS após os updates"
+        ],
+        section2: [
+            "Validar Collation",
+            "Validar Backup",
+            "Validar e Ajustar as licenças(DBAccessUser)",
+            "Ajuste de flavor",
+            "Validar SFTP ou ajustar Solarwinds",
+            "Ajustar campos nas SX6* e XX0,XX1",
+            "Ajustar environments",
+            "Ajustar smartclient.ini",
+            "Validar e ajustar INIS",
+            "Validar e Ajustar SpecialKey"
+        ],
+        section3: [
+            "Alterar o tema sunset/standard",
+            "Ativar modo debug",
+            "Alterar para ctree local",
+            "Limpar temporários da system e http-root da protheus_data",
+            "Atualizar Binário com dbapi.dll, printer.exe e webapp.dll",
+            "Criar Usuario DBmonitor",
+            "Ativar SmartView",
+            "Configurar Crystal",
+            "Ajustar balanceamento do serviço Monitor",
+            "Incluir DNS no arquivos hosts"
+        ],
+        section4: [
+            "Remover CNPJS do SIGAFAT",
+            "Incluir CNPJS nos TSS Compartilhados",
+            "Validar restore",
+            "Remover License do dbaccess.ini do TSS Dedicado",
+            "Atualizar rpo, schemas e urls do TSS Dedicado",
+            "Configurar o REST do Totvs Transmite do TSS Dedicado",
+            "Validar acesso nas rotinas",
+            "Validar e ajustar WebApp",
+            "Validar acesso nos links dos serviços adicionais",
+            "Configurar Gooddata",
+            "Configurar Neogrid",
+            "Extrair fontes customizados",
+            "Documentar os dados de acesso do ambiente",
+            "Ajustar card no JIRA"
+        ]
+    };
+
+    let timers = {};
+
+    function createActivityRow(item, index, sectionId) {
+        const row = document.createElement('tr');
+        const isSection0 = sectionId === 'section0';
+        const isSection2 = sectionId === 'section2';
+        const showManualInput = isSection0; // Tempo manual apenas na seção 0
+
+        row.innerHTML = `
+            <td id="${sectionId}-item-${index}">${item}</td>
+            <td>
+                <button class="start" onclick="toggleTimer('${sectionId}', ${index}, this)">Iniciar Timer</button>
+            </td>
+            <td id="${sectionId}-time-${index}">0s</td>
+            ${showManualInput ? `<td class="manual-time-cell">
+                <input type="text" id="${sectionId}-manual-time-${index}" class="manual-time-input" placeholder="0s" oninput="updateManualTime('${sectionId}', ${index})">
+            </td>` : ''}
+            <td>
+                <button class="remove-button" onclick="removeItem('${sectionId}', ${index})">Remover</button>
+            </td>
+        `;
+
+        document.getElementById(sectionId).appendChild(row);
+    }
+
+    function toggleTimer(sectionId, index, button) {
+        const timerKey = `${sectionId}-${index}`;
+        if (!timers[timerKey]) {
+            timers[timerKey] = {
+                startTime: 0,
+                totalTime: 0,
+                interval: null
+            };
+        }
+
+        if (timers[timerKey].interval === null) {
+            timers[timerKey].startTime = Date.now();
+            timers[timerKey].interval = setInterval(() => updateTimer(sectionId, index), 1000);
+            button.textContent = 'Parar Timer';
+            button.classList.remove('start');
+            button.classList.add('stop');
+        } else {
+            clearInterval(timers[timerKey].interval);
+            timers[timerKey].totalTime += (Date.now() - timers[timerKey].startTime) / 1000;
+            timers[timerKey].interval = null;
+            button.textContent = 'Iniciar Timer';
+            button.classList.remove('stop');
+            button.classList.add('start');
+            document.getElementById(`${sectionId}-item-${index}`).classList.add('completed');
+        }
+    }
+
+    function updateTimer(sectionId, index) {
+        const timerKey = `${sectionId}-${index}`;
+        if (timers[timerKey]) {
+            const elapsedTime = Math.floor((Date.now() - timers[timerKey].startTime) / 1000) + timers[timerKey].totalTime;
+            const formattedTime = formatTime(elapsedTime);
+            document.getElementById(`${sectionId}-time-${index}`).textContent = formattedTime;
+        }
+    }
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        seconds = Math.floor(seconds % 60);
+        return `${hours}h ${minutes % 60}m ${seconds}s`;
+    }
+
+    function removeItem(sectionId, index) {
+        const row = document.getElementById(`${sectionId}-item-${index}`).closest('tr');
+        row.remove();
+    }
+
+    function updateManualTime(sectionId, index) {
+        const manualInput = document.getElementById(`${sectionId}-manual-time-${index}`);
+        let manualTime = parseInt(manualInput.value.replace('s', ''), 10) || 0;
+        manualTime = Math.max(manualTime, 0);
+        manualInput.value = `${manualTime}s`;
+    }
+
+    function calculateTotalTime() {
+        let totalTime = 0;
+        let activeTimer = null;
+
+        for (const key in timers) {
+            const timer = timers[key];
+            if (timer.totalTime !== undefined) {
+                totalTime += timer.totalTime;
+                if (timer.interval !== null) {
+                    activeTimer = key;
+                }
+            }
+        }
+
+        document.getElementById('total-time').textContent = `Tempo Total: ${formatTime(totalTime)}`;
+
+        if (activeTimer) {
+            const [sectionId, index] = activeTimer.split('-');
+            const element = document.getElementById(`${sectionId}-item-${index}`);
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    function initialize() {
+        Object.keys(items).forEach(sectionId => {
+            items[sectionId].forEach((item, index) => createActivityRow(item, index, sectionId));
+        });
+    }
+
+    initialize();
+</script>
+</body>
+</html>
