@@ -91,9 +91,13 @@
     addCardButton.addEventListener("click", addNewCard);
 
     function addNewCard() {
-        const newCard = createCard();
-        cardsContainer.appendChild(newCard);
-        saveCards();
+        if (cardsContainer) {
+            const newCard = createCard();
+            cardsContainer.appendChild(newCard);
+            saveCards();
+        } else {
+            console.error("O contêiner de cards não foi encontrado.");
+        }
     }
 
     function createCard(timeLeft = 72000, title = '') {
@@ -180,6 +184,7 @@
             cardsData.push({
                 title: titleInput.value,
                 timeLeft: card.dataset.timeLeft,
+                intervalId: card.dataset.intervalId
             });
         });
         localStorage.setItem('cards', JSON.stringify(cardsData));
@@ -190,6 +195,9 @@
         cardsData.forEach(data => {
             const card = createCard(data.timeLeft, data.title);
             cardsContainer.appendChild(card);
+            if (data.intervalId !== "null") {
+                startTimer(card, card.querySelector(".time-display"));
+            }
         });
     }
 });
