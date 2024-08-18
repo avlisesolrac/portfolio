@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cronômetro App</title>
     <style>
-    body {
+        body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     margin: 0;
@@ -39,6 +39,15 @@
     border-radius: 5px;
 }
 
+.card input.title {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
 .card button {
     margin-right: 10px;
     padding: 5px 10px;
@@ -52,6 +61,14 @@
     background-color: #0056b3;
 }
 
+.card button.delete {
+    background-color: #dc3545;
+}
+
+.card button.delete:hover {
+    background-color: #c82333;
+}
+
 .time-display {
     font-size: 1.5em;
     margin-bottom: 10px;
@@ -63,8 +80,8 @@
         <button id="addCard">Adicionar Cronômetro</button>
         <div id="cardsContainer"></div>
     </div>
-    <script>
-document.addEventListener("DOMContentLoaded", function () {
+    <script src="script.js">
+        document.addEventListener("DOMContentLoaded", function () {
     const cardsContainer = document.getElementById("cardsContainer");
     const addCardButton = document.getElementById("addCard");
 
@@ -79,9 +96,16 @@ document.addEventListener("DOMContentLoaded", function () {
         saveCards();
     }
 
-    function createCard(timeLeft = 72000) {
+    function createCard(timeLeft = 72000, title = '') {
         const card = document.createElement("div");
         card.className = "card";
+
+        const titleInput = document.createElement("input");
+        titleInput.className = "title";
+        titleInput.type = "text";
+        titleInput.placeholder = "Título do Projeto";
+        titleInput.value = title;
+        titleInput.addEventListener("input", saveCards);
 
         const timeDisplay = document.createElement("div");
         timeDisplay.className = "time-display";
@@ -95,9 +119,16 @@ document.addEventListener("DOMContentLoaded", function () {
         stopButton.textContent = "Parar";
         stopButton.addEventListener("click", () => stopTimer(card));
 
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete";
+        deleteButton.textContent = "Excluir";
+        deleteButton.addEventListener("click", () => deleteCard(card));
+
+        card.appendChild(titleInput);
         card.appendChild(timeDisplay);
         card.appendChild(startButton);
         card.appendChild(stopButton);
+        card.appendChild(deleteButton);
 
         card.dataset.timeLeft = timeLeft;
         card.dataset.intervalId = null;
@@ -129,6 +160,12 @@ document.addEventListener("DOMContentLoaded", function () {
         saveCards();
     }
 
+    function deleteCard(card) {
+        stopTimer(card);
+        card.remove();
+        saveCards();
+    }
+
     function formatTime(seconds) {
         const h = Math.floor(seconds / 3600);
         const m = Math.floor((seconds % 3600) / 60);
@@ -139,7 +176,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function saveCards() {
         const cardsData = [];
         document.querySelectorAll('.card').forEach(card => {
+            const titleInput = card.querySelector('.title');
             cardsData.push({
+                title: titleInput.value,
                 timeLeft: card.dataset.timeLeft,
             });
         });
@@ -149,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadCards() {
         const cardsData = JSON.parse(localStorage.getItem('cards')) || [];
         cardsData.forEach(data => {
-            const card = createCard(data.timeLeft);
+            const card = createCard(data.timeLeft, data.title);
             cardsContainer.appendChild(card);
         });
     }
