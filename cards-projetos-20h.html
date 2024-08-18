@@ -181,11 +181,9 @@
         const cardsData = [];
         document.querySelectorAll('.card').forEach(card => {
             const titleInput = card.querySelector('.title');
-            cardsData.push({
-                title: titleInput.value,
-                timeLeft: card.dataset.timeLeft,
-                intervalId: card.dataset.intervalId
-            });
+            const timeLeft = card.dataset.timeLeft;
+            const intervalId = card.dataset.intervalId;
+            cardsData.push({ title: titleInput.value, timeLeft, intervalId });
         });
         localStorage.setItem('cards', JSON.stringify(cardsData));
     }
@@ -195,7 +193,7 @@
         cardsData.forEach(data => {
             const card = createCard(data.timeLeft, data.title);
             cardsContainer.appendChild(card);
-            if (data.intervalId !== "null") {
+            if (data.intervalId && data.intervalId !== "null") {
                 startTimer(card, card.querySelector(".time-display"));
             }
         });
