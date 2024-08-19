@@ -117,16 +117,25 @@
 
         const startButton = document.createElement("button");
         startButton.textContent = "Iniciar";
-        startButton.addEventListener("click", () => startTimer(card, timeDisplay));
+        startButton.addEventListener("click", () => {
+            console.log("Iniciar clicado");
+            startTimer(card, timeDisplay);
+        });
 
         const stopButton = document.createElement("button");
         stopButton.textContent = "Parar";
-        stopButton.addEventListener("click", () => stopTimer(card));
+        stopButton.addEventListener("click", () => {
+            console.log("Parar clicado");
+            stopTimer(card);
+        });
 
         const deleteButton = document.createElement("button");
         deleteButton.className = "delete";
         deleteButton.textContent = "Excluir";
-        deleteButton.addEventListener("click", () => deleteCard(card));
+        deleteButton.addEventListener("click", () => {
+            console.log("Excluir clicado");
+            deleteCard(card);
+        });
 
         card.appendChild(titleInput);
         card.appendChild(timeDisplay);
@@ -141,7 +150,10 @@
     }
 
     function startTimer(card, timeDisplay) {
-        if (card.dataset.intervalId) return;
+        if (card.dataset.intervalId) {
+            console.log("Já existe um cronômetro em execução.");
+            return;
+        }
 
         const intervalId = setInterval(() => {
             let timeLeft = parseInt(card.dataset.timeLeft);
@@ -156,11 +168,15 @@
         }, 1000);
 
         card.dataset.intervalId = intervalId;
+        console.log("Cronômetro iniciado.");
     }
 
     function stopTimer(card) {
-        clearInterval(card.dataset.intervalId);
-        card.dataset.intervalId = null;
+        if (card.dataset.intervalId) {
+            clearInterval(card.dataset.intervalId);
+            card.dataset.intervalId = null;
+            console.log("Cronômetro parado.");
+        }
         saveCards();
     }
 
