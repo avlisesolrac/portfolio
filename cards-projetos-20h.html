@@ -80,24 +80,19 @@
         <button id="addCard">Adicionar Cronômetro</button>
         <div id="cardsContainer"></div>
     </div>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+ document.addEventListener("DOMContentLoaded", function () {
     const cardsContainer = document.getElementById("cardsContainer");
     const addCardButton = document.getElementById("addCard");
 
-    // Load saved cards
     loadCards();
-
     addCardButton.addEventListener("click", addNewCard);
 
     function addNewCard() {
-        if (cardsContainer) {
-            const newCard = createCard();
-            cardsContainer.appendChild(newCard);
-            saveCards();
-        } else {
-            console.error("O contêiner de cards não foi encontrado.");
-        }
+        const newCard = createCard();
+        cardsContainer.appendChild(newCard);
+        saveCards();
     }
 
     function createCard(timeLeft = 72000, title = '') {
@@ -117,25 +112,16 @@
 
         const startButton = document.createElement("button");
         startButton.textContent = "Iniciar";
-        startButton.addEventListener("click", () => {
-            console.log("Iniciar clicado");
-            startTimer(card, timeDisplay);
-        });
+        startButton.addEventListener("click", () => startTimer(card, timeDisplay));
 
         const stopButton = document.createElement("button");
         stopButton.textContent = "Parar";
-        stopButton.addEventListener("click", () => {
-            console.log("Parar clicado");
-            stopTimer(card);
-        });
+        stopButton.addEventListener("click", () => stopTimer(card));
 
         const deleteButton = document.createElement("button");
         deleteButton.className = "delete";
         deleteButton.textContent = "Excluir";
-        deleteButton.addEventListener("click", () => {
-            console.log("Excluir clicado");
-            deleteCard(card);
-        });
+        deleteButton.addEventListener("click", () => deleteCard(card));
 
         card.appendChild(titleInput);
         card.appendChild(timeDisplay);
@@ -144,7 +130,7 @@
         card.appendChild(deleteButton);
 
         card.dataset.timeLeft = timeLeft;
-        card.dataset.intervalId = null;
+        card.dataset.intervalId = "";
 
         return card;
     }
@@ -168,13 +154,13 @@
         }, 1000);
 
         card.dataset.intervalId = intervalId;
-        console.log("Cronômetro iniciado.");
+        console.log("Cronômetro iniciado.", intervalId);
     }
 
     function stopTimer(card) {
         if (card.dataset.intervalId) {
             clearInterval(card.dataset.intervalId);
-            card.dataset.intervalId = null;
+            card.dataset.intervalId = "";
             console.log("Cronômetro parado.");
         }
         saveCards();
@@ -198,8 +184,11 @@
         document.querySelectorAll('.card').forEach(card => {
             const titleInput = card.querySelector('.title');
             const timeLeft = card.dataset.timeLeft;
-            const intervalId = card.dataset.intervalId;
-            cardsData.push({ title: titleInput.value, timeLeft, intervalId });
+            cardsData.push({
+                title: titleInput.value,
+                timeLeft,
+                intervalId: card.dataset.intervalId
+            });
         });
         localStorage.setItem('cards', JSON.stringify(cardsData));
     }
@@ -209,12 +198,10 @@
         cardsData.forEach(data => {
             const card = createCard(data.timeLeft, data.title);
             cardsContainer.appendChild(card);
-            if (data.intervalId && data.intervalId !== "null") {
-                startTimer(card, card.querySelector(".time-display"));
-            }
         });
     }
 });
+
     </script>
 </body>
 </html>
