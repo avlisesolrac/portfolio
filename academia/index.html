@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,6 +51,23 @@
             background-color: #28a745;
         }
 
+        .fichas button.disabled {
+            background-color: #dc3545;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .fichas button.disabled .date-label {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #fff;
+            color: #dc3545;
+            padding: 2px 5px;
+            font-size: 12px;
+            border-radius: 50%;
+        }
+
         .ficha {
             margin-bottom: 20px;
         }
@@ -91,6 +107,43 @@
             cursor: pointer;
         }
 
+        .btn-reset {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background-color: #ffc107;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        #timer {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        #timer {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #timer .fa-circle-check {
+            font-size: 30px;
+            color: #28a745; /* Cor verde para o ícone */
+        }
+
+
         /*CODIGOS DA ORIGEM INDEX.HTML*/
 
         li {
@@ -111,15 +164,12 @@
             margin-left: 10px;
             font-size: 0.8em;
             padding: 3px 6px;
-            display: none;
+            /*display: none;*/
             background-color: #008CBA;
             border: 1px solid black;
             cursor: pointer;
         }
-        .disabled {
-            pointer-events: none;
-            opacity: 0.6;
-        }
+        
         .active-group {
             font-weight: bold;
             border: 2px solid #008CBA;
@@ -154,7 +204,6 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <body>
     <div class="container">
         <h2>Gerenciamento de Treinos</h2>
@@ -165,10 +214,9 @@
             <button data-target="fichaC">Ficha C</button>
             <button data-target="fichaD">Ficha D</button>
         </div>
-
-        <button id="btnStart" class="button_timer btn-start" disabled>Iniciar Treino</button>
-        <span id="generalTimer" class="timer" style="display: none;"></span>
-
+        <div id="timer">00:00:00</div>
+        <button id="btnStart" class="btn-start" disabled>Iniciar Treino</button>
+        <button id="btnReset" class="btn-reset" style="display:none;">Concluir Treino</button>
         <div id="fichaA" class="ficha">
         <!-- FICHA A - INÍCIO -->
             <h3>Ficha A - Treino de Peito, Triceps e Ombro</h3>
@@ -573,7 +621,6 @@
             </div>
         <!-- FICHA D - FIM -->
         </div>
-        <button id="endButton" onclick="endGeneralTimer()" class="button_timer btn-start">Finalizar Treino</button>
     </div>
 
     <script>
@@ -584,6 +631,8 @@
         let currentCheckbox = null;
         let currentGroup = null;
         let exercisesStarted = false; // Flag para indicar se os exercícios foram iniciados
+        let timerInterval;
+        let startTime;
 
         document.addEventListener("DOMContentLoaded", () => {
             loadWeights();
@@ -610,9 +659,13 @@
         }
 
         function tryActivateGroup(groupId) {
-            if (!exercisesStarted) return; // Não faz nada se os exercícios não foram iniciados
+            if (!exercisesStarted) {
+                alert("Inicie o Treino, primeiro!");
+                return;
+            }
             activateGroup(groupId);
         }
+
 
         function activateGroup(groupId) {
             const group = document.querySelector(`.exercise-group[data-group-id="${groupId}"]`);
@@ -709,8 +762,24 @@
             if (completedCount === totalCount) {
                 deactivateGroup(group);
                 moveToNextGroup();
+                // Verifique se não há mais grupos para ativar
+                if (!document.querySelector('.exercise-group:not(.completed)')) {
+                    // Se todos os grupos foram completados, finalize o treino
+                    endWorkout();
+                }
             }
         }
+
+        function endWorkout() {
+            clearInterval(timerInterval); // Pare o timer geral
+            document.getElementById('btnStart').style.display = 'none';
+            document.getElementById('btnReset').style.display = 'block';
+
+            const timerElement = document.getElementById('timer');
+            timerElement.innerHTML = '<i class="fa-solid fa-circle-check"></i> Treino Concluído'; // Adiciona ícone e texto
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
 
         function moveToNextGroup() {
             const groups = Array.from(document.querySelectorAll('.exercise-group'));
@@ -759,47 +828,75 @@
             }
         });
 
+        document.getElementById('btnReset').addEventListener('click', function () {
+            const activeButton = document.querySelector('.fichas button.active');
+            const today = new Date();
+            const dateLabel = `${today.getDate()}/${today.getMonth() + 1}`;
+
+            if (activeButton) {
+                activeButton.classList.add('disabled');
+                activeButton.innerHTML += `<span class="date-label">${dateLabel}</span>`;
+                activeButton.classList.remove('active');
+
+                localStorage.setItem(activeButton.dataset.target + '_disabled', 'true');
+                localStorage.setItem(activeButton.dataset.target + '_date', dateLabel);
+            }
+
+            clearInterval(timerInterval); // Para o timer quando o treino é concluído
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
         function startExercises() {
-            startGeneralTimer();
-            exercisesStarted = true;
             document.getElementById('btnStart').style.display = 'none';
-            document.getElementById('generalTimer').style.display = 'inline';
+            document.getElementById('btnReset').style.display = 'block';
+            startTimer();
+            exercisesStarted = true; // Defina como true aqui
         }
 
-        function startGeneralTimer() {
-            const generalTimerSpan = document.getElementById('generalTimer');
-            generalTimerSpan.textContent = `Tempo de treino: ${formatTime(elapsedTime)}`;
+        function startTimer() {
+            startTime = new Date().getTime();
 
-            generalTimerInterval = setInterval(() => {
-                elapsedTime++;
-                generalTimerSpan.textContent = `Tempo de treino: ${formatTime(elapsedTime)}`;
+            timerInterval = setInterval(function () {
+                const now = new Date().getTime();
+                const elapsedTime = now - startTime;
+
+                const hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+
+                document.getElementById("timer").innerHTML = 
+                    (hours < 10 ? "0" : "") + hours + ":" +
+                    (minutes < 10 ? "0" : "") + minutes + ":" +
+                    (seconds < 10 ? "0" : "") + seconds;
             }, 1000);
         }
 
-        function formatTime(seconds) {
-            const hrs = Math.floor(seconds / 3600);
-            const mins = Math.floor((seconds % 3600) / 60);
-            const secs = seconds % 60;
-            return `${hrs > 0 ? hrs + 'h ' : ''}${mins > 0 ? mins + 'm ' : ''}${secs}s`;
-        }
+        document.querySelectorAll('.fichas button').forEach(button => {
+            button.addEventListener('click', function () {
+                if (this.classList.contains('disabled')) {
+                    if (confirm('Deseja restaurar essa ficha?')) {
+                        this.classList.remove('disabled');
+                        this.querySelector('.date-label').remove();
 
-        document.getElementById('endButton').addEventListener('click', function () {
-            if (!this.disabled) {
-                endGeneralTimer();
-            }
+                        localStorage.removeItem(this.dataset.target + '_disabled');
+                        localStorage.removeItem(this.dataset.target + '_date');
+                    }
+                }
+            });
         });
 
-        function endGeneralTimer() {
-            if (generalTimerInterval !== null) {
-                clearInterval(generalTimerInterval);
-                generalTimerInterval = null;
-            }
-            document.getElementById('generalTimer').textContent = ` Tempo encerrado após ${formatTime(elapsedTime)}`;
-            document.getElementById('endButton').style.display = 'none';
-        }
-        // Inicialmente esconde todas as fichas
+        // Recarrega o estado das fichas da última sessão
+        window.onload = function () {
+            document.querySelectorAll('.fichas button').forEach(button => {
+                const disabled = localStorage.getItem(button.dataset.target + '_disabled');
+                const date = localStorage.getItem(button.dataset.target + '_date');
+                if (disabled === 'true') {
+                    button.classList.add('disabled');
+                    button.innerHTML += `<span class="date-label">${date}</span>`;
+                }
+            });
+        };
         document.querySelectorAll('.ficha').forEach(ficha => ficha.style.display = 'none');
     </script>
 </body>
-
 </html>
