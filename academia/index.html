@@ -21,6 +21,15 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
+        .exercise-group {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 5px;
+            margin-bottom: 10px;
+            /*text-align: center;*/
+        }
+
         h2 {
             text-align: center;
             margin-bottom: 20px;
@@ -161,13 +170,22 @@
             margin: 10px;
         }
         .skip-button {
+            /*
             margin-left: 10px;
             font-size: 0.8em;
             padding: 3px 6px;
-            /*display: none;*/
+            /*display: none;
             background-color: #008CBA;
             border: 1px solid black;
             cursor: pointer;
+            */
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
         }
         
         .active-group {
@@ -199,7 +217,9 @@
         }
         /*li{border: dotted black;width: 250px}*/
         img {
-            text-align: center;
+        /*text-align: center;*/
+            height: 100%;
+            width: 100%;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -235,7 +255,7 @@
 
             <div class="exercise-group" data-group-id="supinoReto" onclick="tryActivateGroup('supinoReto')">
                 <h2>Supino Reto<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/supino-reto.webp" alt="">
+                <img src="imagens/supino-reto.webp" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('supinoReto', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -246,7 +266,7 @@
 
             <div class="exercise-group" data-group-id="crucifixoDeclinado" onclick="tryActivateGroup('crucifixoDeclinado')">
                 <h2>Crucifixo Declinado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/crucifixo-declinado.gif" alt="">
+                <img src="imagens/crucifixo-declinado.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoDeclinado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoDeclinado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -257,7 +277,7 @@
 
             <div class="exercise-group" data-group-id="crucifixoInclinado" onclick="tryActivateGroup('crucifixoInclinado')">
                 <h2>Crucifixo Inclinado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/crucifixo-inclinado.gif" alt="">
+                <img src="imagens/crucifixo-inclinado.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoInclinado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('crucifixoInclinado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -268,7 +288,7 @@
 
             <div class="exercise-group" data-group-id="desenvolvimentoOmbro" onclick="tryActivateGroup('desenvolvimentoOmbro')">
                 <h2>Desenvolvimento<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/desenvolvimento-ombro.webp" alt="">
+                <img src="imagens/desenvolvimento-ombro.webp" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('desenvolvimentoOmbro', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('desenvolvimentoOmbro', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -279,7 +299,7 @@
 
             <div class="exercise-group" data-group-id="tricepsCross" onclick="tryActivateGroup('tricepsCross')">
                 <h2>Triceps Cross(Barra W)<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/triceps-pulley.gif" alt="">
+                <img src="imagens/triceps-pulley.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="35" onchange="saveWeight('tricepsCross', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="35" onchange="saveWeight('tricepsCross', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -290,7 +310,7 @@
 
             <div class="exercise-group" data-group-id="tricepsFrances" onclick="tryActivateGroup('tricepsFrances')">
                 <h2>Triceps Francês<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/triceps-frances.webp" alt="">
+                <img src="imagens/triceps-frances.webp" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('tricepsFrances', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="12" onchange="saveWeight('tricepsFrances', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -301,7 +321,7 @@
 
             <div class="exercise-group" data-group-id="tricepsCoice" onclick="tryActivateGroup('tricepsCoice')">
                 <h2>Triceps Coice Cross<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/triceps-coice.gif" alt="">
+                <img src="imagens/triceps-coice.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('tricepsCoice', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('tricepsCoice', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -312,7 +332,7 @@
 
             <div class="exercise-group" data-group-id="elevacaoLateral" onclick="tryActivateGroup('elevacaoLateral')">
                 <h2>Elevação Lateral<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/elevacao-lateral.gif" alt="">
+                <img src="imagens/elevacao-lateral.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateral', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateral', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -323,7 +343,7 @@
 
             <div class="exercise-group" data-group-id="elevacaoLateralSentado" onclick="tryActivateGroup('elevacaoLateralSentado')">
                 <h2>Elevação Sentado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/elevacao-lateral-sentado.gif" alt=""/>
+                <img src="imagens/elevacao-lateral-sentado.gif" alt=""/>
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateralSentado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="7" onchange="saveWeight('elevacaoLateralSentado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -334,7 +354,7 @@
 
             <div class="exercise-group" data-group-id="encolhimento" onclick="tryActivateGroup('encolhimento')">
                 <h2>Encolhimento<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/encolhimento.gif" alt="">
+                <img src="imagens/encolhimento.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="22" onchange="saveWeight('encolhimento', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="22" onchange="saveWeight('encolhimento', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -360,7 +380,7 @@
 
             <div class="exercise-group" data-group-id="legPress" onclick="tryActivateGroup('legPress')">
                 <h2>Leg Press 45º<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/leg-press.webp" alt="">
+                <img src="imagens/leg-press.webp" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="80" onchange="saveWeight('legPress', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="80" onchange="saveWeight('legPress', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -371,7 +391,7 @@
 
             <div class="exercise-group" data-group-id="agachamentoPendulo" onclick="tryActivateGroup('agachamentoPendulo')">
                 <h2>Agachamento Pendulo<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/agachamento-pendulo.gif" alt="">
+                <img src="imagens/agachamento-pendulo.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('agachamentoPendulo', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -382,7 +402,7 @@
 
             <div class="exercise-group" data-group-id="afundoSmith" onclick="tryActivateGroup('afundoSmith')">
                 <h2>Afundo Smith<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/afundo-smith.webp" alt="">
+                <img src="imagens/afundo-smith.webp" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('afundoSmith', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="5" onchange="saveWeight('afundoSmith', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -393,7 +413,7 @@
 
             <div class="exercise-group" data-group-id="elevacaoPelvica" onclick="tryActivateGroup('elevacaoPelvica')">
                 <h2>Elevação Pélvica<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/elevacao-pelvica.gif" alt="">
+                <img src="imagens/elevacao-pelvica.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="30" onchange="saveWeight('elevacaoPelvica', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="30" onchange="saveWeight('elevacaoPelvica', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -404,7 +424,7 @@
 
             <div class="exercise-group" data-group-id="cadeiraAbdutora" onclick="tryActivateGroup('cadeiraAbdutora')">
                 <h2>Cadeira Abdutora<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/cadeira-abdutora.gif" alt="">
+                <img src="imagens/cadeira-abdutora.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('cadeiraAbdutora', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('cadeiraAbdutora', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -415,7 +435,7 @@
 
             <div class="exercise-group" data-group-id="abdominalInfra" onclick="tryActivateGroup('abdominalInfra')">
                 <h2>Abdominal Infra<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/abdominal-infra.gif" alt="">
+                <img src="imagens/abdominal-infra.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInfra', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInfra', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -426,7 +446,7 @@
 
             <div class="exercise-group" data-group-id="abdominalInclinado" onclick="tryActivateGroup('abdominalInclinado')">
                 <h2>Abdominal Inclinado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/abdominal-inclinado.webp" alt="">
+                <img src="imagens/abdominal-inclinado.webp" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInclinado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="0" onchange="saveWeight('abdominalInclinado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -452,7 +472,7 @@
 
             <div class="exercise-group" data-group-id="puxadaFrente" onclick="tryActivateGroup('puxadaFrente')">
                 <h2>Puxada Frente<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/puxada-frente.webp" alt="">
+                <img src="imagens/puxada-frente.webp" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaFrente', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaFrente', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -464,7 +484,7 @@
 
             <div class="exercise-group" data-group-id="puxadaSupinada" onclick="tryActivateGroup('puxadaSupinada')">
                 <h2>Puxada Supinada<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/puxada-supinada.gif" alt="">
+                <img src="imagens/puxada-supinada.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaSupinada', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('puxadaSupinada', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -475,7 +495,7 @@
 
             <div class="exercise-group" data-group-id="remadaTriangulo" onclick="tryActivateGroup('remadaTriangulo')">
                 <h2>Remada Triângulo<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/remada-triangulo.gif" alt="">
+                <img src="imagens/remada-triangulo.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('remadaTriangulo', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('remadaTriangulo', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -486,7 +506,7 @@
 
             <div class="exercise-group" data-group-id="remadaCavalinho" onclick="tryActivateGroup('remadaCavalinho')">
                 <h2>Pull Down Cross<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/remada-cavalinho.webp" alt="">
+                <img src="imagens/remada-cavalinho.webp" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="25" onchange="saveWeight('remadaCavalinho', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="25" onchange="saveWeight('remadaCavalinho', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -497,7 +517,7 @@
 
             <div class="exercise-group" data-group-id="roscaDireta" onclick="tryActivateGroup('roscaDireta')">
                 <h2>Rosca Direta<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/rosca-direta.webp" alt="">
+                <img src="imagens/rosca-direta.webp" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaDireta', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaDireta', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -508,7 +528,7 @@
 
             <div class="exercise-group" data-group-id="roscaScott" onclick="tryActivateGroup('roscaScott')">
                 <h2>Rosca Scott<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/rosca-scott.webp" alt="">
+                <img src="imagens/rosca-scott.webp" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaScott', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('roscaScott', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -519,7 +539,7 @@
 
             <div class="exercise-group" data-group-id="roscaCross" onclick="tryActivateGroup('roscaCross')">
                 <h2>Rosca Cross<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/rosca-unilateral.gif" alt="">
+                <img src="imagens/rosca-unilateral.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('roscaCross', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="10" onchange="saveWeight('roscaCross', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -545,7 +565,7 @@
 
             <div class="exercise-group" data-group-id="cadeiraFlexora" onclick="tryActivateGroup('cadeiraFlexora')">
                 <h2>Cadeira Flexora<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/cadeira-flexora.gif" alt="">
+                <img src="imagens/cadeira-flexora.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="50" onchange="saveWeight('cadeiraFlexora', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="50" onchange="saveWeight('cadeiraFlexora', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -556,7 +576,7 @@
 
             <div class="exercise-group" data-group-id="mesaFlexora" onclick="tryActivateGroup('mesaFlexora')">
                 <h2>Mesa Flexora<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/mesa-flexora.gif" alt="">
+                <img src="imagens/mesa-flexora.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('mesaFlexora', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('mesaFlexora', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -567,7 +587,7 @@
 
             <div class="exercise-group" data-group-id="stiffBelt" onclick="tryActivateGroup('stiffBelt')">
                 <h2>Stiff no Belt<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/stiff.gif" alt="">
+                <img src="imagens/stiff.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('stiffBelt', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('stiffBelt', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -578,7 +598,7 @@
 
             <div class="exercise-group" data-group-id="panturrilhaPe" onclick="tryActivateGroup('panturrilhaPe')">
                 <h2>Panturrilha em Pé<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/panturrilha-pe.webp" alt="">
+                <img src="imagens/panturrilha-pe.webp" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('panturrilhaPe', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="40" onchange="saveWeight('panturrilhaPe', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -589,7 +609,7 @@
 
             <div class="exercise-group" data-group-id="panturrilhaSentado" onclick="tryActivateGroup('panturrilhaSentado')">
                 <h2>Panturrilha Sentado<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/panturrilha-sentado.gif" alt="">
+                <img src="imagens/panturrilha-sentado.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('panturrilhaSentado', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="20" onchange="saveWeight('panturrilhaSentado', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -600,7 +620,7 @@
 
             <div class="exercise-group" data-group-id="panturrilhaHorizontal" onclick="tryActivateGroup('panturrilhaHorizontal')">
                 <h2>Panturrilha Horizontal<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/panturrilha-horizontal.gif" alt="">
+                <img src="imagens/panturrilha-horizontal.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('panturrilhaHorizontal', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('panturrilhaHorizontal', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -611,7 +631,7 @@
 
             <div class="exercise-group" data-group-id="cadeiraAdutora" onclick="tryActivateGroup('cadeiraAdutora')">
                 <h2>Cadeira Adutora<button class="skip-button" onclick="skipTimer(this)">Pular</button></h2>
-                <img width="340px" src="imagens/cadeira-adutora.gif" alt="">
+                <img src="imagens/cadeira-adutora.gif" alt="">
                 <ol class="exercise-list disabled">
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('cadeiraAdutora', 0, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
                     <li><label><i class="fas fa-dumbbell"></i> <input type="number" value="15" onchange="saveWeight('cadeiraAdutora', 1, this.value)"><input type="checkbox" onclick="toggleCompleted(this)"/></label><span class="timer"></span></li>
@@ -660,7 +680,8 @@
 
         function tryActivateGroup(groupId) {
             if (!exercisesStarted) {
-                alert("Clique em Iniciar Treino!");
+                alert("Inicie o Treino, primeiro!");
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 return;
             }
             activateGroup(groupId);
