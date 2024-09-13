@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Digital</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+    <h1>Minha Lista de Livros</h1>
+
+    <div style="text-align:center;">
+        <button class="button add" onclick="addBook()">Adicionar Livro</button>
+    </div>
+
+    <div class="container" id="book-list">
+
+        <div class="book-card">
+            <img src="URL_DA_IMAGEM_COMPORTE-SE" alt="Comporte-se" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Comporte-se</div>
+                <div class="book-author">Robert Sapolsky</div>
+                <div class="book-info">Páginas: X | Tempo de Leitura: X horas</div>
+                <div class="book-price">R$ X,XX</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="URL_DA_IMAGEM_O_CORPO_FALA" alt="O corpo fala" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O corpo fala</div>
+                <div class="book-author">Pierre Weil</div>
+                <div class="book-info">Páginas: X | Tempo de Leitura: X horas</div>
+                <div class="book-price">R$ X,XX</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="URL_DA_IMAGEM_COMPORTE-SE" alt="Comporte-se" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Comporte-se</div>
+                <div class="book-author">Robert Sapolsky</div>
+                <div class="book-info">Páginas: X | Tempo de Leitura: X horas</div>
+                <div class="book-price">R$ X,XX</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="URL_DA_IMAGEM_O_CORPO_FALA" alt="O corpo fala" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O corpo fala</div>
+                <div class="book-author">Pierre Weil</div>
+                <div class="book-info">Páginas: X | Tempo de Leitura: X horas</div>
+                <div class="book-price">R$ X,XX</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Adicione mais livros aqui -->
+    </div>
+
+    <div class="footer">
+        <p>Biblioteca Online - Todos os direitos reservados © 2024</p>
+    </div>
+
+    <script>
+        function addBook() {
+            let bookTitle = prompt("Digite o título do livro:");
+            let bookAuthor = prompt("Digite o autor do livro:");
+            let bookPages = prompt("Digite o número de páginas:");
+            let bookPrice = prompt("Digite o preço do livro:");
+            let bookCover = prompt("Digite a URL da capa do livro:");
+
+            if (bookTitle && bookAuthor && bookPages && bookPrice && bookCover) {
+                let bookList = document.getElementById('book-list');
+
+                let newBook = document.createElement('div');
+                newBook.classList.add('book-card');
+                newBook.innerHTML = `
+                    <img src="${bookCover}" alt="${bookTitle}" class="book-cover">
+                    <div class="book-details">
+                        <div class="book-title">${bookTitle}</div>
+                        <div class="book-author">${bookAuthor}</div>
+                        <div class="book-info">Páginas: ${bookPages} | Tempo de Leitura: X horas</div>
+                        <div class="book-price">R$ ${bookPrice}</div>
+                        <div class="book-actions">
+                            <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                        </div>
+                    </div>
+                `;
+                bookList.appendChild(newBook);
+            }
+        }
+
+        function markAsRead(button) {
+            let bookCard = button.closest('.book-card');
+            let bookList = document.getElementById('book-list');
+
+            bookList.removeChild(bookCard);
+            bookList.appendChild(bookCard);
+        }
+    </script>
+
+</body>
+</html>

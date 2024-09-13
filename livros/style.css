@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.book-card {
+    background-color: #fff;
+    width: 300px;
+    margin: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+.book-cover {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.book-details {
+    padding: 15px;
+    text-align: center;
+}
+
+.book-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.book-author {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.book-info {
+    font-size: 14px;
+    color: #555;
+}
+
+.book-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2a9d8f;
+    margin: 10px 0;
+}
+
+.book-actions {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    margin: 5px;
+    color: #fff;
+    background-color: #007bff;
+}
+
+.button.add {
+    background-color: #28a745;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    color: #aaa;
+}

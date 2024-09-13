@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .book-card {
+            background-color: #fff;
+            width: 300px;
+            margin: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .book-card:hover {
+            transform: scale(1.05);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .book-details {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .book-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .book-author {
+            font-size: 16px;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        .book-info {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .book-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2a9d8f;
+            margin: 10px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Minha Biblioteca Online</h1>
+    <div class="container">
+
+        <div class="book-card">
+            <img src="URL_DA_IMAGEM_COMPORTE-SE" alt="Comporte-se" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Comporte-se</div>
+                <div class="book-author">Robert Sapolsky</div>
+                <div class="book-info">Páginas: X | Tempo de Leitura: X horas</div>
+                <div class="book-price">R$ X,XX</div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="URL_DA_IMAGEM_O_CORPO_FALA" alt="O corpo fala" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O corpo fala</div>
+                <div class="book-author">Pierre Weil</div>
+                <div class="book-info">Páginas: X | Tempo de Leitura: X horas</div>
+                <div class="book-price">R$ X,XX</div>
+            </div>
+        </div>
+
+        <!-- Adicione mais cartões de livros aqui -->
+        <!-- Estrutura: 
+        <div class="book-card">
+            <img src="URL_DA_IMAGEM" alt="Título do Livro" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Título do Livro</div>
+                <div class="book-author">Autor do Livro</div>
+                <div class="book-info">Páginas: X | Tempo de Leitura: X horas</div>
+                <div class="book-price">R$ X,XX</div>
+            </div>
+        </div>
+        -->
+    </div>
+
+    <div class="footer">
+        <p>Biblioteca Online - Todos os direitos reservados © 2024</p>
+    </div>
+
+</body>
+</html>

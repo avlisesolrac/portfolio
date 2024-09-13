@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Digital</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+    <h1>Lista de Livros para Leitura:</h1>
+
+    <div class="container" id="book-list">
+
+        <div class="book-card">
+            <img src="imagem/comporte-se.jpg" alt="Comporte-se" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Comporte-se: A biologia humana em nosso melhor e pior</div>
+                <div class="book-author">Robert M. Sapolsky</div>
+                <div class="book-info">Páginas: 808 | Tempo de Leitura: 23 horas</div>
+                <div class="book-price">R$ 90,94</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/o corpo fala.jpg" alt="O corpo fala" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O corpo fala: A linguagem silenciosa da comunicação não verbal</div>
+                <div class="book-author">Pierre Weil</div>
+                <div class="book-info">Páginas: 288 | Tempo de Leitura: 6 horas</div>
+                <div class="book-price">R$ 54,86</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/rapido e devagar.jpg" alt="rapido e devagar" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Rápido e devagar: Duas formas de pensar</div>
+                <div class="book-author">Daniel Kahneman</div>
+                <div class="book-info">Páginas: 608 | Tempo de Leitura: 18 horas</div>
+                <div class="book-price">R$ 29,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/a logica do cisne negro.jpg" alt="A lógica do Cisne Negro" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">A lógica do Cisne Negro (Edição revista e ampliada): O impacto do altamente improvável</div>
+                <div class="book-author">Nassim Nicholas Taleb</div>
+                <div class="book-info">Páginas: 528 | Tempo de Leitura: 15 horas</div>
+                <div class="book-price">R$ 39,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="book-card">
+            <img src="imagem/como fazer amigos e influenciar pessoas.jpg" alt="como fazer amigos e influenciar pessoas" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Como fazer amigos e influenciar pessoas</div>
+                <div class="book-author">Dale Carnegie </div>
+                <div class="book-info">Páginas: 256  | Tempo de Leitura: 7 horas</div>
+                <div class="book-price">R$ 33,24</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/o segredo do carisma.jpg" alt="o segredo do carisma" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O Segredo do Carisma: Ser carismático não é tão difícil quanto parece</div>
+                <div class="book-author">Danilo H. Gomes</div>
+                <div class="book-info">Páginas: 35  | Tempo de Leitura: 1 hora</div>
+                <div class="book-price">R$ 0,00 ou 1,99</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/as armas da persuasão.jpg" alt="as armas da persuasão" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">As armas da persuasão: Como influenciar e não se deixar influenciar</div>
+                <div class="book-author">Robert B. Cialdini</div>
+                <div class="book-info">Páginas: 304  | Tempo de Leitura: 9 horas</div>
+                <div class="book-price">R$ 31,34</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/comunicacao não violenta.jpg" alt="comunicacao não violenta" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Comunicação não violenta - Nova edição: Técnicas para aprimorar relacionamentos pessoais e profissionais</div>
+                <div class="book-author">Marshall B. Rosenberg</div>
+                <div class="book-info">Páginas: 280  | Tempo de Leitura: 8 horas</div>
+                <div class="book-price">R$ 60,20</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/fale como um lider.jpg" alt="fale como um lider" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Fale Como Um Líder: Transformando Seu Estilo De Comunicação Para Influência E Inspiração</div>
+                <div class="book-author">Maxwell Sterling</div>
+                <div class="book-info">Páginas: 56   | Tempo de Leitura: 1 hora</div>
+                <div class="book-price">R$ 0,00 ou 24,99</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/segredos da comunicação eficaz.jpg" alt="segredos da comunicação eficaz" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Segredos da Comunicação Eficaz: Como Melhorar suas Habilidades de Comunicação</div>
+                <div class="book-author">Paulo Migliavacca</div>
+                <div class="book-info">Páginas: 33   | Tempo de Leitura: 1 hora</div>
+                <div class="book-price">R$ 0,00 ou 25,00</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/a arte de falar em publico.jpg" alt="a arte de falar em publico" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">A Arte de Falar em Público</div>
+                <div class="book-author">Stephen E. Lucas </div>
+                <div class="book-info">Páginas: 424   | Tempo de Leitura: 12 horas</div>
+                <div class="book-price">R$ 79,20</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/mostre seu trabalho.jpg" alt="Mostre seu trabalho" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Mostre seu trabalho!: 10 maneiras de compartilhar sua criatividade e ser descoberto</div>
+                <div class="book-author">Austin Kleon</div>
+                <div class="book-info">Páginas: 224   | Tempo de Leitura: 4 horas</div>
+                <div class="book-price">R$ 18,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/aprender a viver.jpg" alt="Aprender a viver" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Aprender a viver: Filosofia para os novos tempos</div>
+                <div class="book-author">Luc Ferry</div>
+                <div class="book-info">Páginas: 285   | Tempo de Leitura: 8 horas</div>
+                <div class="book-price">R$ 19,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/a brief tour o human consciousness.jpg" alt="a brief tour o human consciousness" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">A Brief Tour of Human Consciousness: From Impostor Poodles to Purple Numbers</div>
+                <div class="book-author">V. S. Ramachandran</div>
+                <div class="book-info">Páginas: 208   | Tempo de Leitura: 6 horas</div>
+                <div class="book-price">R$ 107,21 ou 347,55</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/O que o cérebro tem para contar.jpg" alt="o que o cérebro tem para contar" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O que o cérebro tem para contar: Desvendando os mistérios da natureza humana</div>
+                <div class="book-author">V. S. Ramachandran</div>
+                <div class="book-info">Páginas: 440    | Tempo de Leitura: 13 horas</div>
+                <div class="book-price">R$ 54,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/garra.jpg" alt="garra" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Garra: O poder da paixão e da perseverança</div>
+                <div class="book-author">Angela Duckworth</div>
+                <div class="book-info">Páginas: 336    | Tempo de Leitura: 10 horas</div>
+                <div class="book-price">R$ 28,19</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/oraculo da noite.jpg" alt="oraculo da noite" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O oráculo da noite: A história e a ciência do sonho</div>
+                <div class="book-author">Sidarta Ribeiro </div>
+                <div class="book-info">Páginas: 634    | Tempo de Leitura: 18 horas</div>
+                <div class="book-price">R$ 39,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/memórias do subsolo.jpg" alt="memórias do subsolo" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Memórias do subsolo</div>
+                <div class="book-author">Fiódor Dostoiévski </div>
+                <div class="book-info">Páginas: 184    | Tempo de Leitura: 6 horas</div>
+                <div class="book-price">R$ 23,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/a fabrica de cretinos digitais.jpg" alt="a fabrica de cretinos digitais" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">A fábrica de cretinos digitais: Os perigos das telas para nossas crianças (leia também Faça-os ler!)</div>
+                <div class="book-author">Michel Desmurget</div>
+                <div class="book-info">Páginas: 352    | Tempo de Leitura: 10 horas</div>
+                <div class="book-price">R$ 55,34</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/mindset milionario.jpg" alt="mindset milionario" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Mindset milionário</div>
+                <div class="book-author">José Roberto Marques </div>
+                <div class="book-info">Páginas: 208    | Tempo de Leitura: 7 horas</div>
+                <div class="book-price">R$ 0,00 ou 17,01</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/força de vontade não funciona.jpg" alt="força de vontade não funciona" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Força de vontade não funciona</div>
+                <div class="book-author">Benjamin Hardy</div>
+                <div class="book-info">Páginas: 256    | Tempo de Leitura: 8 horas</div>
+                <div class="book-price">R$ 0,00 ou 19,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/habitos atômicos.jpg" alt="habitos atômicos" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Hábitos Atômicos: um Método Fácil e Comprovado de Criar Bons Hábitos e se Livrar dos Maus</div>
+                <div class="book-author">James Clear </div>
+                <div class="book-info">Páginas: 320    | Tempo de Leitura: 9 horas</div>
+                <div class="book-price">R$ 42,70</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/micro-hábitos.jpg" alt="micro-habitos" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Micro-hábitos: As pequenas mudanças que mudam tudo</div>
+                <div class="book-author">B.J. Fogg</div>
+                <div class="book-info">Páginas: 336    | Tempo de Leitura: 10 horas</div>
+                <div class="book-price">R$ 33,16</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/as 5 linguagens do amor.jpg" alt="as 5 linguagens do amor" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">As 5 linguagens do amor - 3ª edição: Como expressar um compromisso de amor a seu cônjuge</div>
+                <div class="book-author">Gary Chapman</div>
+                <div class="book-info">Páginas: 208    | Tempo de Leitura: 6 horas</div>
+                <div class="book-price">R$ 27,76</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/adeus aposentadoria.jpg" alt="adeus aposentadoria" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Adeus, aposentadoria: Como garantir seu futuro sem depender dos outros</div>
+                <div class="book-author">Gustavo Cerbasi</div>
+                <div class="book-info">Páginas: 160    | Tempo de Leitura: 5 horas</div>
+                <div class="book-price">R$ 33,24</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/como organizar sua vida financeira.jpg" alt="como organizar sua vida financeira" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Como organizar sua vida financeira</div>
+                <div class="book-author">Gustavo Cerbasi</div>
+                <div class="book-info">Páginas: 160    | Tempo de Leitura: 5 horas</div>
+                <div class="book-price">R$ 28,49</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/dinheiro os segredos de quem tem.jpg" alt="dinheiro os segredos de quem tem" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Dinheiro: Os segredos de quem tem: Como conquistar e manter sua independência financeira</div>
+                <div class="book-author">Gustavo Cerbasi</div>
+                <div class="book-info">Páginas: 160    | Tempo de Leitura: 5 horas</div>
+                <div class="book-price">R$ 28,49</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/casais inteligentes enriquecem juntos.jpg" alt="casais inteligentes enriquecem juntos" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Casais inteligentes enriquecem juntos: Finanças para casais</div>
+                <div class="book-author">Gustavo Cerbasi</div>
+                <div class="book-info">Páginas: 176   | Tempo de Leitura: 6 horas</div>
+                <div class="book-price">R$ 28,49</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/investimentos inteligentes.jpg" alt="investimentos inteligentes" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Investimentos inteligentes - Edição revista e atualizada: Estratégias para multiplicar seu patrimônio com segurança e eficiência</div>
+                <div class="book-author">Gustavo Cerbasi</div>
+                <div class="book-info">Páginas: 256   | Tempo de Leitura: 9 horas</div>
+                <div class="book-price">R$ 31,34</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/mitos de investimentos.jpg" alt="mitos de investimentos" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Mitos de Investimentos</div>
+                <div class="book-author">Aswath Damodaran</div>
+                <div class="book-info">Páginas: 178    | Tempo de Leitura: 5 horas</div>
+                <div class="book-price">R$ 49,00</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/quanto custa ficar rico.jpg" alt="quanto custa ficar rico" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Quanto Custa Ficar Rico?: o Guia Definitivo Para a Tão Sonhada Liberdade Financeira</div>
+                <div class="book-author">Paulo Portinho </div>
+                <div class="book-info">Páginas: 192    | Tempo de Leitura: 6 horas</div>
+                <div class="book-price">R$ 58,60</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/a receita do bolo.jpg" alt="a receita do bolo" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">A receita do bolo</div>
+                <div class="book-author">Mauro Calil </div>
+                <div class="book-info">Páginas: 192    | Tempo de Leitura: 6 horas</div>
+                <div class="book-price">R$ 34,50</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/os axiomas de zurique.jpg" alt="os axiomas de zurique" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Os axiomas de Zurique</div>
+                <div class="book-author">Max Gunther</div>
+                <div class="book-info">Páginas: 208     | Tempo de Leitura: 6 horas</div>
+                <div class="book-price">R$ 30,03</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/beardstown Ladies.jpg" alt="beardstown Ladies" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Guia Pratico De Invest. Das Beardstown Ladies</div>
+                <div class="book-author">Beardstown Ladies Investment Club</div>
+                <div class="book-info">Páginas: 240      | Tempo de Leitura: 7 horas</div>
+                <div class="book-price">R$ 57,85</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/quem pensa enriquece.jpg" alt="quem pensa enriquece" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Quem pensa enriquece - o legado</div>
+                <div class="book-author">Napoleon Hill </div>
+                <div class="book-info">Páginas: 368       | Tempo de Leitura: 11 horas</div>
+                <div class="book-price">R$ 0,00 ou 24,36</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/comece pelo porque.jpg" alt="comece pelo porque" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Comece pelo porquê: Como grandes líderes inspiram pessoas e equipes a agir</div>
+                <div class="book-author">Simon Sinek</div>
+                <div class="book-info">Páginas: 256   | Tempo de Leitura: 8  horas</div>
+                <div class="book-price">R$ 33,24</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/essencialismo.jpg" alt="essencialismo" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Essencialismo: A disciplinada busca por menos</div>
+                <div class="book-author">Greg McKeown</div>
+                <div class="book-info">Páginas: 272   | Tempo de Leitura: 8  horas</div>
+                <div class="book-price">R$ 33,24</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/a mente acima do dinheiro.jpg" alt="a mente acima do dinheiro" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">A mente acima do dinheiro: o impacto das emoções em sua vida financeira</div>
+                <div class="book-author">Brad Klontz</div>
+                <div class="book-info">Páginas: 288    | Tempo de Leitura: 8  horas</div>
+                <div class="book-price">R$ 29,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/12 meses para enriquecer.jpg" alt="12 meses para enriquecer" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">12 meses para enriquecer (Masculino): o plano da virada</div>
+                <div class="book-author">Marcos Silvestre </div>
+                <div class="book-info">Páginas: 288    | Tempo de Leitura: 8  horas</div>
+                <div class="book-price">R$ 8,00</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/mindset a nova psicologia do sucesso.jpg" alt="mindset a nova psicologia do sucesso" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Mindset: A nova psicologia do sucesso</div>
+                <div class="book-author">Carol S. Dweck</div>
+                <div class="book-info">Páginas: 312  | Tempo de Leitura: 9  horas</div>
+                <div class="book-price">R$ 29,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/como se transformar em um operador e investidor de sucesso.jpg" alt="como se transformar em um operador e investidor de sucesso" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Como se Transformar em um Operador e Investidor de Sucesso: Psicologia, Controle de Risco, Ferramentas e Sistemas de Trading, Gerenciamento de Operações, Disciplina</div>
+                <div class="book-author">Alexander Elder</div>
+                <div class="book-info">Páginas: 304  | Tempo de Leitura: 9  horas</div>
+                <div class="book-price">R$ 57,40</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/o milionario mora ao lado.jpg" alt="o milionario mora ao lado" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O milionário mora ao lado: Os surpreendentes segredos dos ricaços americanos</div>
+                <div class="book-author">Thomas J. Stanley</div>
+                <div class="book-info">Páginas: 324  | Tempo de Leitura: 9  horas</div>
+                <div class="book-price">R$ 45,00</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/a marca da vitória.jpg" alt="a marca da vitória" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">A marca da vitória: A autobiografia do criador da Nike</div>
+                <div class="book-author">Phil Knight</div>
+                <div class="book-info">Páginas: 384  | Tempo de Leitura: 11  horas</div>
+                <div class="book-price">R$ 34,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/mafalda.jpg" alt="mafalda" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Mafalda - Toda Mafalda</div>
+                <div class="book-author">Quino </div>
+                <div class="book-info">Páginas: 444   | Tempo de Leitura: 13  horas</div>
+                <div class="book-price">R$ 183,87</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/os 7 habitos das pessoas altamente eficazes.jpg" alt="os 7 habitos das pessoas altamente eficazes" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Os 7 Hábitos das Pessoas Altamente Eficazes - Edição Customizada: Lições poderosas para a transformação pessoal</div>
+                <div class="book-author">Stephen R. Covey </div>
+                <div class="book-info">Páginas: 462  | Tempo de Leitura: 13  horas</div>
+                <div class="book-price">R$ 9,73</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/sapiens.jpg" alt="sapiens" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Sapiens (Nova edição): Uma breve história da humanidade</div>
+                <div class="book-author">Yuval Noah Harari</div>
+                <div class="book-info">Páginas: 472  | Tempo de Leitura: 14  horas</div>
+                <div class="book-price">R$ 39,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/o investidor inteligente.jpg" alt="o investidor inteligente" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O investidor inteligente</div>
+                <div class="book-author">Benjamin Graham</div>
+                <div class="book-info">Páginas: 672  | Tempo de Leitura: 19  horas</div>
+                <div class="book-price">R$ 53,10</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/ojuara.jpg" alt="ojuara" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">As Pelejas de Ojuara</div>
+                <div class="book-author">Nei Leandro de Castro</div>
+                <div class="book-info">Páginas: 332  | Tempo de Leitura: 10  horas</div>
+                <div class="book-price">R$ 77,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/auto da compadecida.jpg" alt="auto da compadecida" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Auto da Compadecida</div>
+                <div class="book-author">Ariano Suassuna </div>
+                <div class="book-info">Páginas: 208   | Tempo de Leitura: 6  horas</div>
+                <div class="book-price">R$ 39,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/ansiedade.jpg" alt="ansiedade" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Ansiedade: Domine sua mente. Viva sem medo.</div>
+                <div class="book-author">Juliano Pimentel</div>
+                <div class="book-info">Páginas: 242   | Tempo de Leitura: 7  horas</div>
+                <div class="book-price">R$ 0,00 ou 21,99</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/por que ninguem me disse isso antes.jpg" alt="por que ninguem me disse isso antes" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Por que ninguém me disse isso antes?: Ferramentas para enfrentar os altos e baixos da vida</div>
+                <div class="book-author">Julie Smith</div>
+                <div class="book-info">Páginas: 272   | Tempo de Leitura: 7  horas</div>
+                <div class="book-price">R$ 28,49</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/o dançarino de tango.jpg" alt="o dançarino de tango" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O Dançarino de Tango: a história de um jovem empreendedor que transformou tombos em passos de dança</div>
+                <div class="book-author">Brunno Galvão</div>
+                <div class="book-info">Páginas: 160    | Tempo de Leitura: 6  horas</div>
+                <div class="book-price">R$ 24,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/do mil ao milhão.jpg" alt="do mil ao milhão" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Do Mil ao Milhão. Sem Cortar o Cafezinho.</div>
+                <div class="book-author">Thiago Nigro</div>
+                <div class="book-info">Páginas: 192  | Tempo de Leitura: 6  horas</div>
+                <div class="book-price">R$ 0,00 ou 26,50</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/pai rico pai pobre.jpg" alt="pai rico pai pobre" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Pai Rico, pai Pobre</div>
+                <div class="book-author">Kiyosaki Robert T</div>
+                <div class="book-info">Páginas: 336   | Tempo de Leitura: 10  horas</div>
+                <div class="book-price">R$ 42,75</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/o poder da autorresponsabilidade.jpg" alt="o poder da autorresponsabilidade" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O poder da autorresponsabilidade: A ferramenta comprovada que gera alta performance e resultados em pouco tempo</div>
+                <div class="book-author">Paulo Vieira</div>
+                <div class="book-info">Páginas: 154   | Tempo de Leitura: 6  horas</div>
+                <div class="book-price">R$ 17,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/o poder da ação.jpg" alt="o poder da ação" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O poder da ação</div>
+                <div class="book-author">Paulo Vieira</div>
+                <div class="book-info">Páginas: 253   | Tempo de Leitura: 9  horas</div>
+                <div class="book-price">R$ 48,39</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/a unica coisa.jpg" alt="a unica coisa" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">A única coisa: o foco pode trazer resultados extraordinários para sua vida</div>
+                <div class="book-author">Gary Keller</div>
+                <div class="book-info">Páginas: 208   | Tempo de Leitura: 6  horas</div>
+                <div class="book-price">R$ 199,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/o milagre da manhã.jpg" alt="o milagre da manhã" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O milagre da manhã</div>
+                <div class="book-author">Hal Elrod</div>
+                <div class="book-info">Páginas: 188   | Tempo de Leitura: 6  horas</div>
+                <div class="book-price">R$ 29,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/manual de analise técnica.jpg" alt="manual de analise técnica" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Manual de Análise Técnica: Essência e Estratégias Avançadas: Tudo o que um Investidor Precisa Saber Para Prosperar na Bolsa de Valores Até em Tempos de Crise</div>
+                <div class="book-author">Marcos Abe</div>
+                <div class="book-info">Páginas: 256    | Tempo de Leitura: 9  horas</div>
+                <div class="book-price">R$ 51,78</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/a sutil arte de ligar o foda-se.jpg" alt="a sutil arte de ligar o foda-se" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">A Sutil Arte de Ligar o F*da-Se: Uma estratégia inusitada para uma vida melhor</div>
+                <div class="book-author">Mark Manson</div>
+                <div class="book-info">Páginas: 224  | Tempo de Leitura: 7  horas</div>
+                <div class="book-price">R$ 33,21</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/candlestick.jpg" alt="candlestick" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Candlestick: um Método Para Ampliar Lucros na Bolsa de Valores</div>
+                <div class="book-author">Carlos Alberto Debastiani</div>
+                <div class="book-info">Páginas: 288  | Tempo de Leitura: 7  horas</div>
+                <div class="book-price">R$ 63,27</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/produtividade para quem quer tempo.jpg" alt="produtividade para quem quer tempo" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Produtividade para quem quer tempo: Aprenda a produzir mais sem ter que trabalhar mais</div>
+                <div class="book-author">Geronimo Theml</div>
+                <div class="book-info">Páginas: 160  | Tempo de Leitura: 6  horas</div>
+                <div class="book-price">R$ 40,56</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/23 habitos anti-procrastinação.jpg" alt="23 habitos anti-procrastinação" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">23 Hábitos Anti-Procrastinação: Como Deixar de Ser Preguiçoso e Ter Resultados Em Sua Vida</div>
+                <div class="book-author">S.J. Scott </div>
+                <div class="book-info">Páginas: 75  | Tempo de Leitura: 3  horas</div>
+                <div class="book-price">R$ 0,00 ou 7,99</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/seja foda.jpg" alt="seja foda" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Seja foda!</div>
+                <div class="book-author">Caio Carneiro</div>
+                <div class="book-info">Páginas: 208  | Tempo de Leitura: 6  horas</div>
+                <div class="book-price">R$ 0,00 ou 36,54</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/o monge e o executivo.jpg" alt="o monge e o executivo" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O monge e o executivo: Uma história sobre a essência da liderança</div>
+                <div class="book-author">James C. Hunter</div>
+                <div class="book-info">Páginas: 144   | Tempo de Leitura: 6  horas</div>
+                <div class="book-price">R$ 28,49</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/como convencer alguém em 90 segundos.jpg" alt="como convencer alguém em 90 segundos" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Como Convencer Alguém Em 90 Segundos</div>
+                <div class="book-author">Nicholas Boothman </div>
+                <div class="book-info">Páginas: 265   | Tempo de Leitura: 9  horas</div>
+                <div class="book-price">R$ 35,53</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/scrum.jpg" alt="scrum" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Scrum: A arte de fazer o dobro do trabalho na metade do tempo</div>
+                <div class="book-author">Jeff Sutherland</div>
+                <div class="book-info">Páginas: 288   | Tempo de Leitura: 9  horas</div>
+                <div class="book-price">R$ 31,34</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/101.jpg" alt="101" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">101 perguntas e respostas para investidores iniciantes</div>
+                <div class="book-author">Tiago Reis </div>
+                <div class="book-info">Páginas: 136   | Tempo de Leitura: 6  horas</div>
+                <div class="book-price">R$ 0,00 ou 20,00</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/sonho grande.jpg" alt="sonho grande" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Sonho grande: Como Jorge Paulo Lemann, Marcel Telles e Beto Sicupira revolucionaram o capitalismo brasileiro e conquistaram o mundo</div>
+                <div class="book-author">Cristiane Correa</div>
+                <div class="book-info">Páginas: 264  | Tempo de Leitura: 9  horas</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/crash.jpg" alt="crash" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Crash: Uma breve história da economia</div>
+                <div class="book-author">Alexandre Versignassi </div>
+                <div class="book-info">Páginas: 352  | Tempo de Leitura: 12  horas</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/hackeando tudo.jpg" alt="hackeando tudo" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Hackeando Tudo: 90 Hábitos Para Mudar o Rumo de Uma Geração</div>
+                <div class="book-author">Raiam Santos</div>
+                <div class="book-info">Páginas: 142  | Tempo de Leitura: 6  horas</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/o poder do hábito.jpg" alt="o poder do hábito" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O poder do hábito: Por que fazemos o que fazemos na vida e nos negócios</div>
+                <div class="book-author">Charles Duhigg</div>
+                <div class="book-info">Páginas: 408   | Tempo de Leitura: 13  horas</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adicione mais livros aqui -->
+    </div>
+
+    <div class="footer">
+        <p>Biblioteca Online - Todos os direitos reservados © 2024</p>
+    </div>
+
+    <script>
+        /*function addBook() {
+            let bookTitle = prompt("Digite o título do livro:");
+            let bookAuthor = prompt("Digite o autor do livro:");
+            let bookPages = prompt("Digite o número de páginas:");
+            let bookPrice = prompt("Digite o preço do livro:");
+            let bookCover = prompt("Digite a URL da capa do livro:");
+
+            if (bookTitle && bookAuthor && bookPages && bookPrice && bookCover) {
+                let bookList = document.getElementById('book-list');
+
+                let newBook = document.createElement('div');
+                newBook.classList.add('book-card');
+                newBook.innerHTML = `
+                    <img src="${bookCover}" alt="${bookTitle}" class="book-cover">
+                    <div class="book-details">
+                        <div class="book-title">${bookTitle}</div>
+                        <div class="book-author">${bookAuthor}</div>
+                        <div class="book-info">Páginas: ${bookPages} | Tempo de Leitura: X horas</div>
+                        <div class="book-price">R$ ${bookPrice}</div>
+                        <div class="book-actions">
+                            <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                        </div>
+                    </div>
+                `;
+                bookList.appendChild(newBook);
+            }
+        }*/
+
+        function markAsRead(button) {
+            let bookCard = button.closest('.book-card');
+            let bookList = document.getElementById('book-list');
+
+            bookList.removeChild(bookCard);
+            bookList.appendChild(bookCard);
+        }
+    </script>
+
+</body>
+</html>
