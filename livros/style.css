@@ -95,3 +95,13 @@ h1 {
     font-size: 12px;
     color: #aaa;
 }
+
+.filter-container {
+    margin: 20px 0;
+    text-align: center;
+}
+.filter-container input, .filter-container select {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 1rem;
+}
