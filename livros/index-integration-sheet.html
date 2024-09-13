@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar e Exibir Livros</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- Firebase App (número da versão do SDK pode variar) -->
+    <script type="module">
+        // Configuração do Firebase
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+        import { getDatabase, ref, set, push, onValue, remove } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
+        import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js';
+
+        // Substitua pelas suas próprias configurações do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCyXrfF2QY0Y_ieYHhZjsJlbQ62_Ax0a_Q",
+            authDomain: "livros-cc1d3.firebaseapp.com",
+            projectId: "livros-cc1d3",
+            storageBucket: "livros-cc1d3.appspot.com",
+            messagingSenderId: "475672292553",
+            appId: "1:475672292553:web:19162d13f9fb39e4983118",
+            measurementId: "G-Y705Z3E82T"
+        };
+
+        // Inicialize o Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const storage = getStorage(app);
+
+        // Função para adicionar um livro
+        async function addBook(title, author, year, pages, readingTime, price, imageFile) {
+            try {
+                let imageUrl = '';
+                if (imageFile) {
+                    const imageRef = storageRef(storage, 'images/' + imageFile.name);
+                    await uploadBytes(imageRef, imageFile);
+                    imageUrl = await getDownloadURL(imageRef);
+                }
+                const bookRef = push(ref(db, 'books'));
+                await set(bookRef, {
+                    title: title,
+                    author: author,
+                    year: year,
+                    pages: pages,
+                    readingTime: readingTime,
+                    price: price,
+                    imageUrl: imageUrl
+                });
+            } catch (error) {
+                console.error('Erro ao adicionar livro:', error);
+                alert('Erro ao adicionar livro.');
+            }
+        }
+
+        // Função para criar um card de livro
+        function createBookCard(book, bookId) {
+            const card = document.createElement('div');
+            card.className = 'book-card';
+            card.innerHTML = `
+                <div class="book-card-header">
+                    <span class="delete-button" onclick="deleteBook('${bookId}')">X</span>
+                </div>
+                <img src="${book.imageUrl || 'default-cover.jpg'}" alt="${book.title}" class="book-cover">
+                <div class="book-details">
+                    <h3 class="book-title">${book.title}</h3>
+                    <p><strong>Autor:</strong> ${book.author}</p>
+                    <p><strong>Ano:</strong> ${book.year}</p>
+                    <p><strong>Páginas:</strong> ${book.pages}</p>
+                    <p><strong>Tempo de Leitura:</strong> ${book.readingTime}</p>
+                    <p><strong>Preço:</strong> ${book.price}</p>
+                </div>
+            `;
+            return card;
+        }
+
+        // Função para exibir livros
+        function displayBooks() {
+            const booksContainer = document.getElementById('booksContainer');
+            booksContainer.innerHTML = ''; // Limpa o container antes de adicionar novos cards
+
+            const booksRef = ref(db, 'books');
+            onValue(booksRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    Object.keys(data).forEach(key => {
+                        const book = data[key];
+                        const bookCard = createBookCard(book, key);
+                        booksContainer.appendChild(bookCard);
+                    });
+                }
+            });
+        }
+
+        // Função para excluir um livro
+        function deleteBook(bookId) {
+            const bookRef = ref(db, 'books/' + bookId);
+            remove(bookRef)
+                .then(() => {
+                    alert('Livro excluído com sucesso!');
+                })
+                .catch((error) => {
+                    console.error('Erro ao excluir livro:', error);
+                    alert('Erro ao excluir livro.');
+                });
+        }
+
+        // Manipulador do formulário
+        document.addEventListener('DOMContentLoaded', () => {
+            displayBooks();
+
+            document.getElementById('bookForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const title = document.getElementById('title').value;
+                const author = document.getElementById('author').value;
+                const year = document.getElementById('year').value;
+                const pages = document.getElementById('pages').value;
+                const readingTime = document.getElementById('readingTime').value;
+                const price = document.getElementById('price').value;
+                const imageFile = document.getElementById('image').files[0];
+                
+                addBook(title, author, year, pages, readingTime, price, imageFile)
+                    .then(() => {
+                        alert('Livro adicionado com sucesso!');
+                        document.getElementById('bookForm').reset();
+                        displayBooks();
+                    })
+                    .catch((error) => {
+                        console.error('Erro ao adicionar livro:', error);
+                        alert('Erro ao adicionar livro.');
+                    });
+            });
+        });
+    </script>
+    <style>
+        .book-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 10px;
+            padding: 10px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .book-card-header {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .delete-button {
+            color: red;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .book-cover {
+            width: 100px;
+            height: auto;
+            margin-right: 15px;
+        }
+
+        .book-details {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Adicionar e Exibir Livros</h1>
+    <div class="container" id="booksContainer"></div>
+    <form id="bookForm">
+        <label for="title">Título:</label>
+        <input type="text" id="title" required><br><br>
+        <label for="author">Autor:</label>
+        <input type="text" id="author" required><br><br>
+        <label for="year">Ano:</label>
+        <input type="number" id="year" required><br><br>
+        <label for="pages">Páginas:</label>
+        <input type="number" id="pages" required><br><br>
+        <label for="readingTime">Tempo de Leitura:</label>
+        <input type="text" id="readingTime" required><br><br>
+        <label for="price">Preço:</label>
+        <input type="text" id="price" required><br><br>
+        <label for="image">Imagem:</label>
+        <input type="file" id="image" accept="image/*"><br><br>
+        <button type="submit">Adicionar Livro</button>
+    </form>
+</body>
+</html>

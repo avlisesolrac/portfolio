@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Digital</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+    <h1>Lista de Livros para Leitura:</h1>
+
+    <div class="filter-container">
+        <!-- Campo de Pesquisa -->
+        <input type="text" id="searchInput" placeholder="Pesquisar por título, autor, preço..." onkeyup="filterBooks()">
+
+        <!-- Agrupar por Autor -->
+        <select id="groupBy" onchange="groupBooks()">
+            <option value="none">Agrupar por...</option>
+            <option value="author">Autor</option>
+            <option value="price-asc">Preço - Crescente</option>
+            <option value="price-desc">Preço - Decrescente</option>
+            <option value="time-asc">Tempo de Leitura - Crescente</option>
+            <option value="time-desc">Tempo de Leitura - Decrescente</option>
+        </select>
+    </div>
+
+    <div class="container" id="book-list">
+
+        <div class="book-card">
+            <img src="imagem/comporte-se.jpg" alt="Comporte-se" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Comporte-se: A biologia humana em nosso melhor e pior</div>
+                <div class="book-author">Robert M. Sapolsky</div>
+                <div class="book-info">Páginas: 808 | Tempo de Leitura: 23 horas</div>
+                <div class="book-price">R$ 90,94</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/o corpo fala.jpg" alt="O corpo fala" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">O corpo fala: A linguagem silenciosa da comunicação não verbal</div>
+                <div class="book-author">Pierre Weil</div>
+                <div class="book-info">Páginas: 288 | Tempo de Leitura: 6 horas</div>
+                <div class="book-price">R$ 54,86</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <img src="imagem/rapido e devagar.jpg" alt="rapido e devagar" class="book-cover">
+            <div class="book-details">
+                <div class="book-title">Rápido e devagar: Duas formas de pensar</div>
+                <div class="book-author">Daniel Kahneman</div>
+                <div class="book-info">Páginas: 608 | Tempo de Leitura: 18 horas</div>
+                <div class="book-price">R$ 29,90</div>
+                <div class="book-actions">
+                    <button class="button" onclick="markAsRead(this)">Marcar como Lido</button>
+                </div>
+            </div>
+        </div>
+        <!-- Adicione os outros livros aqui -->
+    </div>
+
+    <script>
+        // Função para filtrar os livros com base no campo de pesquisa
+        function filterBooks() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const books = document.querySelectorAll('.book-card');
+            
+            books.forEach(book => {
+                const title = book.querySelector('.book-title').textContent.toLowerCase();
+                const author = book.querySelector('.book-author').textContent.toLowerCase();
+                const price = book.querySelector('.book-price').textContent.toLowerCase();
+                const pages = book.querySelector('.book-info').textContent.toLowerCase();
+
+                if (title.includes(searchInput) || author.includes(searchInput) || price.includes(searchInput) || pages.includes(searchInput)) {
+                    book.style.display = '';
+                } else {
+                    book.style.display = 'none';
+                }
+            });
+        }
+
+        // Função para agrupar os livros por autor
+        function groupBooks() {
+            const groupBy = document.getElementById('groupBy').value;
+            const bookList = document.getElementById('book-list');
+            const books = Array.from(document.querySelectorAll('.book-card'));
+
+            if (groupBy === 'author') {
+                books.sort((a, b) => {
+                    const authorA = a.querySelector('.book-author').textContent.toLowerCase();
+                    const authorB = b.querySelector('.book-author').textContent.toLowerCase();
+                    return authorA.localeCompare(authorB);
+                });
+            }
+            // Ordenar por preço crescente
+            else if (groupBy === 'price-asc') {
+                books.sort((a, b) => {
+                    const priceA = parseFloat(a.querySelector('.book-price').textContent.replace('R$', '').replace(',', '.'));
+                    const priceB = parseFloat(b.querySelector('.book-price').textContent.replace('R$', '').replace(',', '.'));
+                    return priceA - priceB;
+                });
+            } 
+            // Ordenar por preço decrescente
+            else if (groupBy === 'price-desc') {
+                books.sort((a, b) => {
+                    const priceA = parseFloat(a.querySelector('.book-price').textContent.replace('R$', '').replace(',', '.'));
+                    const priceB = parseFloat(b.querySelector('.book-price').textContent.replace('R$', '').replace(',', '.'));
+                    return priceB - priceA;
+                });
+            }
+            // Ordenar por tempo de leitura crescente
+            else if (groupBy === 'time-asc') {
+                books.sort((a, b) => {
+                    const timeA = parseInt(a.querySelector('.book-info').textContent.match(/\d+/)[0]);
+                    const timeB = parseInt(b.querySelector('.book-info').textContent.match(/\d+/)[0]);
+                    return timeA - timeB;
+                });
+            } 
+            // Ordenar por tempo de leitura decrescente
+            else if (groupBy === 'time-desc') {
+                books.sort((a, b) => {
+                    const timeA = parseInt(a.querySelector('.book-info').textContent.match(/\d+/)[0]);
+                    const timeB = parseInt(b.querySelector('.book-info').textContent.match(/\d+/)[0]);
+                    return timeB - timeA;
+                });
+            }
+
+            // Limpar e reordenar os livros na interface
+            bookList.innerHTML = '';
+            books.forEach(book => bookList.appendChild(book));
+        }
+    </script>
+
+</body>
+</html>
