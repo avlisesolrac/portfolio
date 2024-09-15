@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h1 {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    margin: 0;
+    font-size: 24px;
+}
+
+.module {
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: left;
+}
+
+.module-btn {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.module-btn:hover {
+    background-color: #45a049;
+}
+
+.module-content {
+    display: none;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: white;
+}
+
+.module-content ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.module-content li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+.module-content li:last-child {
+    border-bottom: none;
+}
+
+.lesson-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lesson-header span {
+    flex: 1;
+}
+
+.play-btn, .complete-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.media-content {
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: grey;
+}

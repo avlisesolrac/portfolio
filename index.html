@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Meu Portfólio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .portfolio-item {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .portfolio-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .portfolio-item h3 {
+            margin: 15px 0 10px;
+        }
+
+        .portfolio-item p {
+            font-size: 0.9em;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Portfólio</h1>
+        <nav>
+            <ul>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#sobre">Sobre Mim</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="projetos" class="container">
+        <h2>Meus Projetos</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="img/academia.png" alt="Treinos da Academia">
+                <h3>Academia</h3>
+                <p>O objetivo desta aplicação web é gerenciar os treinos da academia, onde é dividido por fichas(A,B,C e D) e cada uma é responsável por um agrupamentos específicos do corpo e além disso cada exercício tem as respectivas representações animadas de como realizar a execução do movimento, além disso pode controlar a data que a ultima ficha foi executada, o tempo de execução do treino e o tempo de descanso entre cada série.</p>
+                <a href="academia/index.html" target="_blank">Ver Projeto</a>
+            </div>
+
+            <div class="portfolio-item">
+                <img src="img/livros.png" alt="Livros">
+                <h3>Livros</h3>
+                <p>O objetivo deste projeto é para poder visualizar e gerenciar as leituras dos livros, onde possui controle dos livros para serem lidos e os já lidos, além disso poder visualizar o tempo médio de leitura de cada livro, como também a capa, autor, quantidade de páginas e o preço, além disso é possível buscar por algum livro específico da lista e realizar agrupamentos em ordem crescente ou decrescente.</p>
+                <a href="livros/index.html" target="_blank">Ver Projeto</a>
+            </div>
+
+            <div class="portfolio-item">
+                <img src="img/brainpower.png" alt="BrainPower">
+                <h3>Curso - BrainPower</h3>
+                <p>O objetivo deste projeto é poder fazer o curso BrainPower que tem a finalidade de desenvolver as habilidades e técnicas para compreender e reprogramar o cérebro para atingir metas como não procrastinar, como atingir os objetivos e muito mais...</p>
+                <a href="brainpower/index.html" target="_blank">Ver Projeto</a>
+            </div>
+
+            <!-- Adicione mais projetos aqui -->
+        </div>
+    </section>
+
+    <section id="sobre" class="container">
+        <h2>Sobre Mim</h2>
+        <p>Sou desenvolvedor web e analista de sistemas e estou diariamente em busca do desenvolvimento pessoal e profissional</p>
+    </section>
+
+    <section id="contato" class="container">
+        <h2>Contato</h2>
+        <p>Você pode me contatar através do e-mail: <a href="mailto:carlos.eduardo-silva@hotmail.com">carlos.eduardo-silva@hotmail.com</a></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Carlos Eduardo eduardo-silva</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
