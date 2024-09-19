@@ -98,3 +98,11 @@ h1 {
     height: auto; /* Mantém a proporção do vídeo */
     display: block; /* Evita comportamentos de margem indesejados */
 }
+
+.footer{    
+    background-color: #333;
+    cursor:auto
+}
+.footer:hover {
+    background-color: #333;
+}
