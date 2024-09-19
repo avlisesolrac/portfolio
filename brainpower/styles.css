@@ -87,3 +87,14 @@ h1 {
     text-decoration: line-through;
     color: grey;
 }
+
+.module-content {
+    max-width: 100%; /* Garante que o conteúdo não ultrapasse a largura máxima da div */
+    overflow-x: hidden; /* Oculta qualquer conteúdo que ultrapasse horizontalmente */
+}
+
+.media {
+    max-width: 100%; /* Faz o vídeo se ajustar à largura da div */
+    height: auto; /* Mantém a proporção do vídeo */
+    display: block; /* Evita comportamentos de margem indesejados */
+}
