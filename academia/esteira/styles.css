@@ -1,0 +1,69 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  
+  .container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .timer-display {
+    margin: 20px 0;
+  }
+  
+  #timer {
+    font-size: 2rem;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100px;
+    margin: 20px auto;
+  }
+  
+  
+  #status {
+    font-size: 1.5rem;
+    color: #666;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  button:disabled {
+    background-color: #aaa;
+  }
+  
+
+  #round-counter {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  .fast-phase {
+    background-color: #ff4c4c; /* Vermelho para fase rápida */
+    color: white;
+  }
+  
+  .slow-phase {
+    background-color: #4c92ff; /* Azul tranquilo para fase lenta */
+    color: white;
+  }
+  
+ 
