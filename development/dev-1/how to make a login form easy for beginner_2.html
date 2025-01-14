@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html><!--Início do documento html-->
+    <head><!--Início do cabeçalho da página-->
+	<meta charset="UTF-8">
+        <!--Início do título da página-->
+        <title>Login Form</title>
+        <!--Fim do título da página-->
+        <!--Início do estilo da página-->
+
+        <style>
+            /*Comentário dentro da tag de estilo(style) com barra+asterisco e no final asterisco+barra */
+		
+		/*Estilização no body para remover os espaços dos elementos externos e internos dos espaçamentos padrões*/
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		
+		/*Estilização no identificador LoginForm da div do formulário:*/
+		#loginForm{
+			/*width abaixo vai determinar a largura da div*/
+			width: 340px;
+			/*height abaixo vai determinar a altura da div*/
+			height: 340px;
+			/*background vai determinar a cor de fundo da div*/
+			background: #484747;
+			/*margin em auto vai determinar que este elemento tenha espaçamentos laterais para que fique centralizado na página*/
+			margin: auto;
+			/*margin-top vai determinar que o elemento tenha um espaço de altura, fazendo com que ele fique um pouco mais embaixo na página*/
+			margin-top: 180px;
+			/*border-top abaixo vai determinar uma expessura de 4 pixels de largura da borda superior da div no formato sólido que é uma linha preenchida e com uma cor azulada*/
+			border-top: 4px solid #1293de;
+			/*padding vai adicionar um espaçamento interno entre as bordas da div e os elementos mais internos*/
+			padding: 30px;
+		}
+
+		/*Estilização do elemento h6 de título do formulário de login que está dentro da div com o identificador loginForm*/
+		#loginForm h6{
+			/*margin 0 vai remover o espaçamento externo ao redor do elemento h6*/
+			margin: 0;
+			/*color white vai determinar a cor do texto do elemento, inclusive da borda do elemento se ela estiver visível*/
+			color: white;
+			/*font-size vai determinar o tamanho do texto, neste caso em 20 pixels*/
+			font-size: 20px;
+			/*text-align vai determinar o alinhamento do texto, neste caso está centralizado*/
+			text-align: center;
+			/*height vai determinar a altura que o elemento vai ter e aqui foi aplicado essa altura para que a linha da borda inferior fique afastada do texto do título do formulário*/
+			height: 40px;
+			/*border-bottom vai determinar a expessura da borda e o formato da borda*/
+			border-bottom: 1px solid;
+			/*margin-bottom vai determinar um expaçamento externo na parte inferior do elemento*/
+			margin-bottom: 30px;
+		}
+ 
+		/*Estilização dos elementos de entrada(input) para que o usuário possa interagir na página com a inserção dos dados de login:*/
+		#loginForm .txt{
+			/*width é usado para determinar a largura do elemento e aqui foi especificado 100% para pegar a largura total dos inputs dentro da div do formulário*/
+			width: 100%;
+			/*color vai determinar a cor do texto do elemento, aqui como se trata de um campo input de entrada de dados o texto que será modificado para branco é o que vai ser digitado ou se tivesse algum valor na chave value*/
+			color: white;
+			/*border determina a expessura da borda, o formato da borda aqui é solid, mas pode ser dotted por exemplo e a cor azulada*/
+			border: 1px solid #1293de;
+			/*background é utilizado para determinar qual vai ser a cor de fundo do elemento*/
+			background: #212121;
+			/*font-size vai determinar qual vai ser o tamanho da fonte deste elemento e aqui foi usado para 14 pixels de tamanho*/
+			font-size: 14px;
+			/*padding vai acrescentar o espaçamento interno do elemento e aqui foi usado dois valores, então será 14 pixels de espaçamento superior e inferior e 10 pixels de espaçamento à direita e esquerda*/
+			/*padding: 14px 10px;*/
+			/*Ajustado o padding para os quatro lados, pois a estilização acima estava fazendo com que os inputs passassem da margem de alinhamento*/
+			padding: 14px 0px 14px 1px;
+			/*font-weight em bold irá determinar que a fonte do texto do elemento ficará em negrito.*/
+			font-weight: bold;
+			/*margin-bottom aqui irá acrescentar um espaço de 30 pixels na parte inferior externa do elemento.*/
+			margin-bottom: 30px;
+		}
+
+		/*Estilização do botão de login para autenticar na página*/
+		#button{
+			/*border none irá remover a estilização padrão da borda, então remove a borda do elemento*/
+			//border: none;
+			/*width vai determinar a largura do elemento e aqui vai pegar 100% da largura*/
+			width: 100%;
+			/*height determina a altura do elemento e aqui o botão vai ficar com uma altura fixa de 44 pixels*/
+			height: 44px;
+			/*background determina a cor de fundo do botão e neste caso vai ficar azulado*/
+			background: #1293de;
+			/*color determina a cor do do texto e aqui vai ficar tipo um alaranjado*/
+			color: wheat;
+			/*font-weight vai determinar a expessura do texto então aqui vai ficar em negrito(bold)*/
+			font-weight: bold;
+			/*margin-bottom vai determinar qual é o espaçamento externo do elemento atual para o imediatamente abaixo dele*/
+			margin-bottom: 30px;
+		}
+
+		/*Estilização do menu abaixo do botão de login*/
+		#loginForm a{
+			/*O text-decoration none vai remover a estilização default do elemento html*/
+			text-decoration: none;
+			/*Aqui vai deixar a cor do texto na cor branca*/
+			color: white;
+			/*Aqui vai determinar a fonte Arial para o texto que está dentro do elemento html de link 'a'*/
+			font-family: arial;
+			/*Aqui vai determinar o pixel no valor 15 para o tamanho da fonte*/
+			font-size: 15px;
+		}
+		
+		/*Aqui a estilização vai para todos os links da página, com o com a pseudo-classe hover no seletor de link 'a'*/
+		a:hover{
+		/*Aqui vai determinar que para a borda inferior será aplicado 1px de borda para o elemento em conjunto com o estilo dotted(pontilhado) e cor preta para a borda*/
+			border-bottom: 1px dotted #1293de;
+		}
+		
+        </style>
+        <!--Fim do estilo da página-->
+
+    </head><!--Fím do cabeçalho da página-->
+
+    <body><!-- Início do corpo da página-->
+	<!--Início da div(quadrado do login)-->
+        <div id="loginForm">
+		<!--Título do formulário do login-->
+		<h6>Login Form</h6>
+
+		<!--Primeiro campo (input) de entrada do nome do usuário para login-->
+		<input class="txt" type="text" placeholder=" Nome do Usuário" name="UserN" value=""/>
+
+		<!--Segundo campo (input) de entrada da senha do usuário para login-->
+		<input class="txt" type="password" placeholder=" Senha do Usuário" name="PassN" value=""/>
+
+		<!-- Botão de login para logar na aplicação após inserir os dados de usuário e senha -->
+		<input id="button" type="button" placeholder="Login" name="login" value="LOGIN"/>
+		<center>
+			<a href="#">Don't have an account?</a>
+			<a href="#">Forgotton password?</a><br>
+			<a href="#">Back to HomePage</a>
+		</center>
+        </div>
+	<!--Fím da div(quadrado do login)-->
+    </body><!--Fim do corpo da página-->
+</html><!-- Fim do documento html-->
