@@ -1,0 +1,50 @@
+div{
+	background-color: #24303A;
+	width: 300px;
+	height: 450px;
+	padding: 20px;
+	color: white;
+	font-family: calibri;
+	border-radius: 5px;
+}
+
+h4{
+	text-align: center;
+	font-size: 20px;
+	font-family: calibri;
+	margin-top: 0px;
+}
+
+input{
+	width: 100%;
+	margin-bottom: 15px;
+	padding: 10px;
+	color: white;
+	font-weight: bold;
+	background-color: #24303A;
+	border: 1px solid #1293DE;
+}
+
+input[type=checkbox]{
+	float: left;
+	width: 5%;
+}
+
+input[type=submit]{
+	font-size: 15px;
+	margin: 15px 0px 35px 0px;
+	color: wheat;
+	background-color: #1293DE;
+}
+input[type=submit]:hover{
+	cursor: pointer;
+	border: 1px solid #24303A;
+}
+
+a{
+	text-decoration: none;
+	color: white;
+}
+a:hover{
+	text-decoration: underline;
+}
