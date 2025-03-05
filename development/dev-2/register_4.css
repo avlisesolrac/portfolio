@@ -1,0 +1,51 @@
+div{
+margin: auto;
+width: 350px;
+margin-top: 180px;
+background-color: #24303A;
+padding: 15px;
+height: 480px;
+border-radius: 5px;
+color: white;
+font-family: calibri;
+}
+
+h4{
+font-size: 22px;
+text-align: center;
+}
+
+input{
+width: 100%;
+margin-bottom: 15px;
+padding: 10px;
+background-color: #24303A;
+font-weight:bold;
+color: white;
+border: 1px solid #1293DE;
+}
+
+input[type=submit]{
+margin: 20px 0px 40px 0px;
+color: wheat;
+cursor: pointer;
+border: 1px dotted #1293DE;
+}
+
+input[type="checkbox"]{
+float: left;
+width: 13px;
+}
+
+p{
+margin: 0;
+}
+
+a{
+text-decoration: none;
+color: white;
+}
+
+a:hover{
+border-bottom: 1px dotted white;
+}

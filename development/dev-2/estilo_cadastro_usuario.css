@@ -1,0 +1,65 @@
+div{
+width: 380px;
+height: 520px;
+background-color: darkslategray;
+color: white;
+padding: 15px;
+font-family: calibri;
+border-radius: 10px;
+margin: auto;
+margin-top: 120px;
+}
+
+h4{
+text-align: center;
+font-size: 22px;
+margin-top: 0px;
+}
+
+input{
+width: 100%;
+margin: 0px 0px 20px 0px;
+background-color: darkslategray;
+padding: 15px;
+font-weight: bold;
+color: white;
+border: 1px solid steelblue;
+border-radius: 10px;
+}
+
+input::placeholder{
+color: white;
+font-weight: normal;
+}
+
+input[type="checkbox"]{
+width: auto;
+float: left;
+margin: 3px 3px 0px 0px;
+}
+
+input[type="submit"]{
+margin: 20px 0px 15px 0px;
+color: wheat;
+border-color: green;
+background-color: green;
+}
+
+input[type="submit"]:hover{
+border: 1px solid lightgreen;
+cursor: pointer;
+}
+
+p{
+text-align: center;
+}
+
+a{
+font-weight: bold;
+text-decoration: none;
+color: white;
+}
+
+a:hover{
+text-decoration: underline;
+}

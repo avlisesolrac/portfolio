@@ -45,8 +45,9 @@ input[type=button]:hover{
 	background-color: #6E6E6E;
 }
 #copy{
+	display: block;
 	font-size: 12px;
-	bottom: 0;
-	position: fixed;
-	padding-left: 40%;
+	bottom: 0px;
+	/*position: fixed;*/
+	text-align: center;
 }
