@@ -1,0 +1,44 @@
+body{
+	padding: 0px;
+	margin: 0px;
+	color: white;
+	font-family: calibri;
+	text-shadow: #000 -19px 20px 20px;
+}
+
+#cabecalho{
+	background: url(bg.jpg) no-repeat;
+	background-size: cover;
+	height: 480px;
+}
+
+#h-1{
+	max-width: 1000px;
+	margin: auto;
+	padding: 20px 0px;
+}
+
+#cabecalho h1{
+	color: orange;
+	font-size: 44px;
+}
+
+#cabecalho p{
+	color: orange;
+	font-size: 44px;
+	font-weight: bold;
+}
+
+#cabecalho a{
+	text-decoration: none;
+	color: steelblue;
+	background-color: orange;
+	padding: 4px 20px;
+	font-size: 30px;
+	border-radius: 30px;
+	margin: 10px;
+}
+
+a:hover{
+	border: 1px solid steelblue;
+}

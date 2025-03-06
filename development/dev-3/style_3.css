@@ -1,0 +1,46 @@
+body{
+	margin: 0px;
+	padding: 0px;
+	color: white;
+	font-family: calibri;
+}
+
+#header{
+	background: url(bg.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 480px;
+}
+
+#h-1{
+	max-width: 1000px;
+	margin: auto;
+	padding: 20px 0px;
+}
+
+#h-1 h1{
+	color: orange;
+	font-size: 44px;
+}
+
+#h-1 p{
+	font-size: 60px;
+	color: orange;
+	font-weight: bold;
+}
+
+#h-1 a{
+	text-decoration: none;
+	background-color: lightcoral;
+	padding: 4px 20px;
+	margin: 10px;
+	border-radius: 30px;
+	font-size: 30px;
+	color: white;
+}
+
+#h-1 a:hover{
+	border: 1px dotted orange;
+}
+
+ .sombra {text-shadow:#000 -1px -1px}

@@ -1,0 +1,41 @@
+body{
+    margin: auto;
+    padding: 0;
+    color: white;
+    font-family: calibri;
+}
+
+#header{
+    background: url(bg.jpg);
+    height: 480px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#h-1{
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px 0px;
+}
+
+#h-1 h1{
+	font-size: 44px;
+	color: orange;
+}
+
+#h-1 p{
+	font-weight: bold;
+	font-size: 60px;
+	color: orange;
+}
+
+#h-1 a{
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+    /*background: #8bc34a;*/
+    background-color: orange;
+    padding: 4px 20px;
+    border-radius: 30px;
+    margin: 10px;
+}

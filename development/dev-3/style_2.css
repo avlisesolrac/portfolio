@@ -1,0 +1,40 @@
+body{
+	padding: 0px;
+	margin: 0px;
+	font-family: calibri;
+	color: white;
+}
+
+#header{
+	background: url(bg.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 480px;
+}
+
+#h-1{
+	max-width: 1000px;
+	margin: auto;
+	padding: 20px 0px;
+}
+
+#h-1 h1{
+	font-size: 44px;
+	color: orange;
+}
+
+#h-1 p{
+	font-size: 60px;
+	color: orange;
+	font-weight: bold;
+}
+
+#h-1 a{
+	text-decoration: none;
+	background-color: orange;
+	border-radius: 30px;
+	padding: 4px 20px;
+	font-size: 30px;
+	margin: 10px;
+	color: white;
+}
