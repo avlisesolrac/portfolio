@@ -1,3 +1,4 @@
+/*Este seletor irá estilizar o corpo da página removendo os espaçamentos internos e externos, atribuindo a cor branca para os textos, com fonte calibri e também atribuindo um sombreamento no texto.*/
 body{
 	padding: 0px;
 	margin: 0px;
@@ -6,29 +7,34 @@ body{
 	text-shadow: #000 -1px -1px;
 }
 
+/*Este seletor irá incluir uma imagem de fundo onde ela não se repete, a imagem pega todo o elemento em que está contida com uma altura de 480px.*/
 #cabecalho{
 	background: url(bg.jpg) no-repeat;
 	background-size: cover;
 	height: 480px;
 }
 
+/*Neste seletor é atribuido o valor máximo da largura de 1000px com um margin auto para alinhar o elemento ao centro e com um espaçamento superior e inferior de 20px e 0px nas laterais.*/
 #h-1{
 	max-width: 1000px;
 	margin: auto;
 	padding: 20px 0px;
 }
 
+/*Este seletor atribui uma cor laranja no texto e um fonte com tamanho de 44px.*/
 #cabecalho h1{
 	color: orange;
 	font-size: 44px;
 }
 
+/*Este seletor atribui um tamanho de fonte de 44px de cor laranja e deixa o texto em negrito.*/
 #cabecalho p{
 	font-size: 44px;
 	color: orange;
 	font-weight: bold;
 }
 
+/*Este seletor remove os valores padrões de um link, com a cor steelblue, onde é atribuido uma cor de fundo wheat e um espaçamento interno de 4px nas partes inferior e superior e 20px nas laterais, com um tamanho de fonte de 30px, com bordas nas laterais arredondadas em 30px e um espaçamento externo de 10px.*/
 #cabecalho a{
 	text-decoration: none;
 	color: steelblue;
@@ -39,6 +45,7 @@ body{
 	margin: 10px;
 }
 
+/*Este seletor com hover inclui uma borda pontilhada na cor steelblue e um sombreamento branco no texto quando passa a seta do mouse em cima do elemento.*/
 a:hover{
 	border: 1px dotted steelblue;
 	text-shadow: #fff -1px -1px;
