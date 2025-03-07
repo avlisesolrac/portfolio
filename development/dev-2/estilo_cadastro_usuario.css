@@ -1,3 +1,4 @@
+/*O seletor div foi usado para atribuir uma largura de 380px, uma altura de 520px uma cor de fundo darkslategray, cor de texto branca, um espaçamento interno dos elementos de 15px, uma fonte do tipo calibri, as bordas da div ficaram com um arrendodamento de 10px, a div foi centralizada com um margin automatico e finalizando com um espaçamento externo do top da div com 120px.*/
 div{
 width: 380px;
 height: 520px;
@@ -10,12 +11,15 @@ margin: auto;
 margin-top: 120px;
 }
 
+/*O seletor h4 foi estilizado com um alinhamento centralizado do texto, com uma fonte do tamanho de 22px e foi removido o espaçamento externo do topo com 0px.*/
 h4{
 text-align: center;
 font-size: 22px;
 margin-top: 0px;
 }
 
+
+/*O seletor input foi estilizado com uma largura de 100%, com um espaçamento externo de 0px no topo, 0px na direita, 20px embaixo e 0px na esquerda, com uma cor darkslategray de fundo, um espaçamento interno de 15px, com texto em negrito, a cor do texto em branco e uma borda ao redor do campo com 1px do tipo linha fixa com a cor steelblue e com os cantos das bordas arredondas com 10px.*/
 input{
 width: 100%;
 margin: 0px 0px 20px 0px;
@@ -27,17 +31,20 @@ border: 1px solid steelblue;
 border-radius: 10px;
 }
 
+/*O seletor input foi estilizado com a pseudo-classe placeholder(que é um dos atributos da tag input) para deixar o texto na cor branca e não deixar o texto do placeholder normal, pois estava em negrito.*/
 input::placeholder{
 color: white;
 font-weight: normal;
 }
 
+/*O seletor input do tipo checkbox foi estilizado com uma largura automática, com float do lado esquerdo e com os seguintes espaçamentos externos 3px no topo, 3px do lado direito, 0px na parte inferior e 0px do lado esquerdo.*/
 input[type="checkbox"]{
 width: auto;
 float: left;
 margin: 3px 3px 0px 0px;
 }
 
+/*O seletor input do tipo submit foi estilizado com um espaçamento externo de 20px no topo, 0px na direira, 15px na esquerda e 0px na parte inferior, a cor do texto é wheat, com uma borda da cor verde e com uma cor de fundo com cor verde também.*/
 input[type="submit"]{
 margin: 20px 0px 15px 0px;
 color: wheat;
@@ -45,21 +52,25 @@ border-color: green;
 background-color: green;
 }
 
+/*O seletor input do tipo submit foi estilizado com hover(para quando passar a seta do mouse em cima do elemento) onde vai ser atribuido uma borda de 1px de linha contínua com uma cor lightgreen e a seta do mouse passa a ser do tipo pointer que é default de um link./
 input[type="submit"]:hover{
 border: 1px solid lightgreen;
 cursor: pointer;
 }
 
+/*O seletor p foi estilizado com o alinhamento de texto centralizado*/
 p{
 text-align: center;
 }
 
+/*O seletor a está sendo estilizado com um negrito no texto, removendo a estilização de link para none e atribuindo a cor branca para o texto.*/
 a{
 font-weight: bold;
 text-decoration: none;
 color: white;
 }
 
+/*O seletor a com hover está estilizando o link com um underline no momento que passar a seta do mouse em cima do link.*/
 a:hover{
 text-decoration: underline;
 }

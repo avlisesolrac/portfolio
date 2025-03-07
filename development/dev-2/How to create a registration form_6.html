@@ -1,21 +1,53 @@
+<!--Início do documento html-->
 <html>
+
+<!--Início do cabeçalho do documento html-->
 <head>
+
+<!--tag para incluir um título na página-->
 <title>Cadastro de Usuário</title>
+
+<!--tag para incluir um arquivo externo de folha de estilo para estilizar a página-->
 <link rel="stylesheet" type="text/css" href="estilo_cadastro_usuario.css">
+
 </head>
+<!--Fim do cabeçalho do documento html-->
+
+<!--Início do corpo do documento html-->
 <body>
 
+<!--Início do elemento div para compor todo o conteúdo do formulário de cadastro de usuário-->
 <div>
+
+<!--A tag h4 neste caso vai servir para incluir um título do formulário-->
 <h4>Cadastro de Usuário</h4>
+
+<!--As tags input do tipo text vão servir para incluir um campo de texto para o usuário poder incluir seus dados pessoais-->
 <input type="text" placeholder="Qual é o seu primeiro nome?">
 <input type="text" placeholder="Qual é o seu último nome?">
 <input type="text" placeholder="Qual é o seu e-mail?">
+
+<!--A tag input do tipo password vai servir para que o usuário realize a inclusão da senha pessoal para cadastrar a conta do usuário-->
 <input type="password" placeholder="Qual vai ser a sua senha?">
+
+<!--A tag input do tipo checkbox neste caso vai servir para que o usuario clique concordando com os termos e politica do site para finalizar o cadastro-->
 <input type="checkbox">
+
+<!--A tag span neste caso vai servir para manter o texto dentro dessa tag, para que não fique solta sem tag alguma atrelada no documento e dentro dessa tag tem algumas tags de link a que vão servir para direcionar o usuário para outra página, aqui só tem o cerquilha por que as páginas ainda não foram criadas-->
 <span>Ao clicar em Cadastrar Usuário, você concorda com nossos <a href="#">Termos</a>, <a href="#">Políticas de Privacidade</a> e <a href="#">Política de Cookies</a></span>
+
+<!--A tag input do tipo submit vai servir para que seja realizado o envio dos dados preenchidos para o backend, onde será possível prosseguir com o tratamento dos dados inseridos, por exemplo comando de INSERT no Banco de Dados para inclusão de um novo usuário-->
 <input type="submit" value="Cadastrar Usuário">
+
+<!--A tag p vai servir para inclusão de parágrafo de texto, como houve tratativa específica para os links internos, aqui foi usado somente para centralizar o conteúdo interno dentro da DIV-->
 <p><a href="#">Você já tem uma conta?</a> <a href="#">Voltar para a Página Principal?</a></p>
+
+
 </div>
+<!--Fim do elemento div para compor todo o conteúdo do formulário de cadastro de usuário-->
 
 </body>
+<!--Fim do corpo do documento html-->
+
 </html>
+<!--Fim do documento html-->
